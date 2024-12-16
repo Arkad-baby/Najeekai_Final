@@ -9,7 +9,26 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:ital,wght@0,100;0,300;0,400;0,500;0,700;0,800;0,900;1,100;1,300;1,400;1,500;1,700;1,800;1,900&display=swap" rel="stylesheet">
-
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              clifford: '#da373d',
+            }
+          }
+        }
+      }
+    </script>
+     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+    }
+  </style>
 </head>
 <body>
     <nav class="bg-white shadow-md fixed top-0 left-0 right-0 z-50">
@@ -17,7 +36,7 @@
           class="container mx-auto px-4 py-3 flex items-center justify-between"
         >
           <!-- Logo -->
-          <a href="/">
+          <a href="./index.html">
             <div class="flex items-center shadow p-1 rounded-md px-2">
               <img
                 src="./assets/appLogo.png"
@@ -51,7 +70,7 @@
                 >3</span
               >
             </button>
-            <a href="/profile">
+            <a target="_self" href="./profile.html">
               <button>
                 <i
                   class="fas fa-user-circle text-gray-600 text-2xl hover:text-blue-600"

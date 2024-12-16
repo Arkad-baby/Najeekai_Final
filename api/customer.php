@@ -1,6 +1,6 @@
 <?php
 include 'database.php';
-
+include 'JWTGenerator.php';
 header("Content-Type: application/json");
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
@@ -59,12 +59,17 @@ switch ($method) {
 
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
+
+
         $stmt = $conn->prepare("INSERT INTO customer (username, firstname, email, password, middleName, lastName, address, phoneNumber) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
         $stmt->bind_param("ssssssss", $username, $firstName, $email, $passwordHash, $middleName, $lastName, $address, $phoneNumber);
 
+        $jwt = new JWTGenerator($username,$email); 
+        $signature=$jwt->generateToken();
         if ($stmt->execute()) {
             http_response_code(201); // Created
-            echo json_encode(["status" => "success", "message" => "Customer added successfully"]);
+
+            echo json_encode(["status" => "success", "message" => "Customer added successfully","authToken"=>$signature]);
         } else {
             http_response_code(500); // Server Error
             echo json_encode(["status" => "error", "message" => "Failed to add customer"]);
