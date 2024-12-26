@@ -92,8 +92,8 @@
     <header
       class="pt-20 bg-gradient-to-r from-blue-500 to-purple-600 text-white"
     >
-      <div class="container mx-auto px-4 py-16 flex items-center">
-        <div class="w-1/2 pr-10">
+      <div class="container mx-auto px-4 py-16 flex flex-col-reverse md:flex-row items-center">
+        <div class="w-full md:w-1/2 pr-10">
           <h1 class="text-4xl font-bold mb-6">
             Find Expert Professionals for Your Home
           </h1>
@@ -105,19 +105,19 @@
           <div class="grid grid-cols-3 gap-4 mb-10">
             <div class="bg-white/20 p-4 rounded-lg flex flex-col text-center">
               <i class="fas fa-wrench text-4xl mb-2"></i>
-              <span>Plumbing</span>
+              <span class="hidden md:block" >Plumbing</span>
             </div>
             <div class="bg-white/20 p-4 rounded-lg flex flex-col text-center">
               <i class="fas fa-bolt text-4xl mb-2"></i>
-              <span>Electrical</span>
+              <span class="hidden md:block" >Electrical</span>
             </div>
             <div class="bg-white/20 p-4 rounded-lg flex flex-col text-center">
               <i class="fas fa-home text-4xl mb-2"></i>
-              <span>Carpentry</span>
+              <span class="hidden md:block" >Carpentry</span>
             </div>
           </div>
 
-          <div class="flex space-x-4">
+          <div class="flex space-x-4 w-full ">
             <button
               class="bg-white text-blue-600 px-6 py-3 rounded-full font-semibold hover:bg-blue-50 transition"
             >
@@ -141,7 +141,6 @@
         </div>
       </div>
     </header>
-    <!-- How it Works Section -->
     <!-- How it Works Section -->
     <section class="py-16 bg-white">
       <div class="container mx-auto px-4">
