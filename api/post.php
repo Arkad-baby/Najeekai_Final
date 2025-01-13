@@ -29,7 +29,25 @@ switch ($method) {
             }
 
             $stmt->close();
-        } else {
+        } 
+        else if(isset($_GET['term'])){
+            $stmt = $conn->prepare("SELECT * FROM post WHERE id = ?");
+            $stmt->bind_param("i", $id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $data = $result->fetch_assoc();
+
+            if ($data) {
+                http_response_code(200);
+                echo json_encode(["status" => "success", "data" => $data]);
+            } else {
+                http_response_code(404); // Not Found
+                echo json_encode(["status" => "error", "message" => "Post not found"]);
+            }
+
+            $stmt->close();
+        }
+        else {
             $result = $conn->query("SELECT * FROM post");
             $posts = [];
 

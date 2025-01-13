@@ -46,7 +46,7 @@ class JWTGenerator {
     }
 
     // Decode and verify a JWT
-    public static function decodeToken($jwt, $secret_key) {
+    public static function decodeToken($jwt) {
         $parts = explode('.', $jwt);
 
         if (count($parts) !== 3) {
