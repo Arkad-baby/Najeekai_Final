@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            color: #666;
+            transition: all 0.3s;
+        }
+
+        .tab.active {
+            color: #2563eb;
+            border-bottom: 2px solid #2563eb;
+            margin-bottom: -2px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-size: 14px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        .error {
+            color: #dc2626;
+            font-size: 12px;
+            margin-top: 4px;
+            display: none;
+        }
+
+        .error.show {
+            display: block;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        button:disabled {
+            background: #93c5fd;
+            cursor: not-allowed;
+        }
+
+        .alert {
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .alert-success {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .alert-error {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .freelancer-fields {
+            display: none;
+        }
+
+        .freelancer-fields.show {
+            display: block;
+        }
+
+        @media (max-width: 500px) {
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Create Account</h1>
+        
+        <div class="tabs">
+            <div class="tab active" data-type="customer">Customer</div>
+            <div class="tab" data-type="freelancer">Freelancer</div>
+        </div>
+
+        <form id="signupForm" novalidate>
+            <!-- Basic Info -->
+            <div class="form-group">
+                <label for="username">Username*</label>
+                <input type="text" id="username" name="username" required>
+                <div class="error"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email*</label>
+                <input type="email" id="email" name="email" required>
+                <div class="error"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password*</label>
+                <input type="password" id="password" name="password" required>
+                <div class="error"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="firstName">First Name*</label>
+                <input type="text" id="firstName" name="firstName" required>
+                <div class="error"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="lastName">Last Name*</label>
+                <input type="text" id="lastName" name="lastName" required>
+                <div class="error"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="phoneNumber">Phone Number*</label>
+                <input type="tel" id="phoneNumber" name="phoneNumber" required pattern="[0-9]*" inputmode="numeric" maxlength="15" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                <div class="error"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="address">Address*</label>
+                <input type="text" id="address" name="address" required>
+                <div class="error"></div>
+            </div>
+
+            <!-- Freelancer Fields -->
+            <div class="freelancer-fields">
+                <div class="form-group">
+                    <label for="description">Professional Description*</label>
+                    <textarea id="description" name="description" rows="3"></textarea>
+                    <div class="error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="skills">Skills*</label>
+                    <input type="text" id="skills" name="skills">
+                    <div class="error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="rate">Hourly Rate ($)*</label>
+                    <input type="number" id="rate" name="rate" min="0">
+                    <div class="error"></div>
+                </div>
+            </div>
+
+            <button type="submit">Sign Up</button>
+        </form>
+    </div>
+
+    <script>
+        class SignupForm {
+            constructor() {
+                this.form = document.getElementById('signupForm');
+                this.tabs = document.querySelectorAll('.tab');
+                this.freelancerFields = document.querySelector('.freelancer-fields');
+                this.submitButton = this.form.querySelector('button[type="submit"]');
+                this.userType = 'customer';
+
+                this.validation = {
+                    username: value => value && /^[a-zA-Z0-9_]{3,20}$/.test(value),
+                    email: value => value && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
+                    password: value => value && value.length >= 8,
+                    firstName: value => value && value.length >= 2,
+                    lastName: value => value && value.length >= 2,
+                    phoneNumber: value => value && /^[0-9]{10,15}$/.test(value),
+                    address: value => value && value.length >= 5,
+                    description: value => !this.isFreelancer() || (value && value.length >= 10),
+                    skills: value => !this.isFreelancer() || (value && value.length >= 3),
+                    rate: value => !this.isFreelancer() || (value && Number(value) > 0)
+                };
+
+                this.init();
+            }
+
+            init() {
+                this.tabs.forEach(tab => {
+                    tab.addEventListener('click', () => this.switchTab(tab));
+                });
+
+                this.form.addEventListener('submit', e => this.handleSubmit(e));
+                this.form.addEventListener('input', e => this.handleInput(e));
+                
+                // Add specific handler for phone number
+                const phoneInput = this.form.querySelector('#phoneNumber');
+                phoneInput.addEventListener('input', (e) => {
+                    e.target.value = e.target.value.replace(/\D/g, '');
+                });
+            }
+
+            switchTab(tab) {
+                this.tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                this.userType = tab.dataset.type;
+                
+                if (this.userType === 'freelancer') {
+                    this.freelancerFields.classList.add('show');
+                    this.enableFreelancerValidation();
+                } else {
+                    this.freelancerFields.classList.remove('show');
+                    this.disableFreelancerValidation();
+                }
+            }
+
+            isFreelancer() {
+                return this.userType === 'freelancer';
+            }
+
+            enableFreelancerValidation() {
+                const fields = ['description', 'skills', 'rate'];
+                fields.forEach(field => {
+                    const input = this.form[field];
+                    if (input) input.required = true;
+                });
+            }
+
+            disableFreelancerValidation() {
+                const fields = ['description', 'skills', 'rate'];
+                fields.forEach(field => {
+                    const input = this.form[field];
+                    if (input) {
+                        input.required = false;
+                        this.clearError(input);
+                    }
+                });
+            }
+
+            showError(input, message) {
+                const errorDiv = input.nextElementSibling;
+                errorDiv.textContent = message;
+                errorDiv.classList.add('show');
+            }
+
+            clearError(input) {
+                const errorDiv = input.nextElementSibling;
+                errorDiv.textContent = '';
+                errorDiv.classList.remove('show');
+            }
+
+            validateField(input) {
+                const { name, value } = input;
+                const isValid = this.validation[name]?.(value);
+                
+                if (!isValid) {
+                    this.showError(input, this.getErrorMessage(name));
+                    return false;
+                }
+                
+                this.clearError(input);
+                return true;
+            }
+
+            getErrorMessage(fieldName) {
+                const messages = {
+                    username: 'Username must be 3-20 characters (letters, numbers, underscore)',
+                    email: 'Please enter a valid email address',
+                    password: 'Password must be at least 8 characters',
+                    firstName: 'First name is required',
+                    lastName: 'Last name is required',
+                    phoneNumber: 'Please enter a valid phone number',
+                    address: 'Address is required',
+                    description: 'Description must be at least 10 characters',
+                    skills: 'Please enter your skills',
+                    rate: 'Please enter a valid hourly rate'
+                };
+                return messages[fieldName] || 'This field is required';
+            }
+
+            handleInput(e) {
+                if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+                    this.validateField(e.target);
+                }
+            }
+
+            async handleSubmit(e) {
+                e.preventDefault();
+                this.clearAlerts();
+
+                let isValid = true;
+                const formData = {};
+
+                // Validate all visible fields
+                this.form.querySelectorAll('input, textarea').forEach(input => {
+                    if (input.type !== 'submit' && 
+                        (!input.closest('.freelancer-fields') || this.isFreelancer())) {
+                        if (!this.validateField(input)) {
+                            isValid = false;
+                        }
+                        formData[input.name] = input.value;
+                    }
+                });
+
+                if (!isValid) {
+                    this.showAlert('Please fix the errors in the form', 'error');
+                    return;
+                }
+
+                try {
+                    this.submitButton.disabled = true;
+                    this.submitButton.textContent = 'Signing up...';
+
+                    const apiUrl = this.isFreelancer() 
+                        ? 'http://localhost/Najeekai/api/freelancer.php'
+                        : 'http://localhost/Najeekai/api/customer.php';
+
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            ...formData,
+                            middleName: null,
+                            ...(this.isFreelancer() && {
+                                rate: Number(formData.rate)
+                            })
+                        })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('Registration failed');
+                    }
+
+                    this.showAlert('Registration successful!', 'success');
+                    this.form.reset();
+                    this.switchTab(this.tabs[0]);
+
+                } catch (error) {
+                    this.showAlert(error.message, 'error');
+                } finally {
+                    this.submitButton.disabled = false;
+                    this.submitButton.textContent = 'Sign Up';
+                }
+            }
+
+            showAlert(message, type) {
+                const alert = document.createElement('div');
+                alert.className = `alert alert-${type}`;
+                alert.textContent = message;
+                this.form.insertBefore(alert, this.form.firstChild);
+            }
+
+            clearAlerts() {
+                this.form.querySelectorAll('.alert').forEach(alert => alert.remove());
+            }
+        }
+
+        // Initialize the form
+        new SignupForm();
+    </script>
+</body>
+</html>

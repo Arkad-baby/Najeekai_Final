@@ -1,6 +1,7 @@
 <?php
 include 'database.php';
 include 'JWTGenerator.php';
+
 header("Content-Type: application/json");
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
@@ -9,6 +10,13 @@ header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,
 
 $method = $_SERVER['REQUEST_METHOD'];
 $input = json_decode(file_get_contents('php://input'), true);
+
+if ($method == 'OPTIONS') {
+    header("Access-Control-Allow-Origin: *");
+    header("Access-Control-Allow-Methods: POST, OPTIONS");
+    header("Access-Control-Allow-Headers: Content-Type");
+    exit(0);
+}
 
 switch ($method) {
     case 'GET':

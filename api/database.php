@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
 $username = "root"; // Use environment variables for security
-$password = "root"; // Use environment variables for security
+$password = ""; // Use environment variables for security
 $dbname = "najeekai";
 
 // Create connection
