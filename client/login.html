@@ -1,206 +1,320 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FreelanceHub - Login/Signup</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-purple-50">
-    <div class="min-h-screen flex items-center justify-center p-4">
-        <div class="bg-white rounded-3xl shadow-lg overflow-hidden max-w-lg w-full flex">
-            <!-- Left Section with Logo and Description -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+      }
 
-            <!-- Right Section with Forms -->
-            <div class="w-full p-8">
-                <!-- Tab Switching -->
-                <div class="flex mb-8">
-                    <button onclick="showLogin()" id="loginTab" class="w-1/2 py-2 text-center border-b-2 border-purple-600">Login</button>
-                    <button onclick="showSignup()" id="signupTab" class="w-1/2 py-2 text-center border-b">Signup</button>
-                </div>
+      body {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
 
-                <!-- Login Form -->
-                <form id="loginForm" onsubmit="return validateLogin(event)" class="space-y-4">
-                    <div>
-                        <input type="text" placeholder="Email" id="loginEmail" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500">
-                        <span class="text-red-500 text-sm hidden" id="loginEmailError"></span>
-                    </div>
-                    <div>
-                        <input type="password" placeholder="Password" id="loginPassword" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500">
-                        <span class="text-red-500 text-sm hidden" id="loginPasswordError"></span>
-                    </div>
-                    <button type="submit" class="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700">Login</button>
-                </form>
+      .container {
+        width: 100%;
+        max-width: 400px;
+        background: white;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
 
-                <!-- Signup Form -->
-                <form id="signupForm" onsubmit="return validateSignup(event)" class="hidden space-y-4">
-                    <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <input type="text" placeholder="First Name" id="firstName" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500">
-                            <span class="text-red-500 text-sm hidden" id="firstNameError"></span>
-                        </div>
-                        <div>
-                            <input type="text" placeholder="Last Name" id="lastName" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500">
-                            <span class="text-red-500 text-sm hidden" id="lastNameError"></span>
-                        </div>
-                    </div>
-                    <div>
-                        <input type="text" placeholder="Middle Name (Optional)" id="middleName" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500">
-                    </div>
-                    <div>
-                        <input type="text" placeholder="Username" id="signupUsername" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500">
-                        <span class="text-red-500 text-sm hidden" id="signupUsernameError"></span>
-                    </div>
-                    <div>
-                        <input type="email" placeholder="Email" id="email" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500">
-                        <span class="text-red-500 text-sm hidden" id="emailError"></span>
-                    </div>
-                    <div>
-                        <input type="password" placeholder="Password" id="signupPassword" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500">
-                        <span class="text-red-500 text-sm hidden" id="signupPasswordError"></span>
-                    </div>
-                    <div>
-                        <select id="userType" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-1 focus:ring-purple-500">
-                            <option value="">Select User Type</option>
-                            <option value="freelancer">Freelancer</option>
-                            <option value="client">Client</option>
-                        </select>
-                        <span class="text-red-500 text-sm hidden" id="userTypeError"></span>
-                    </div>
-                    <button type="submit" class="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700">Sign Up</button>
-                </form>
-            </div>
+      .logo {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .logo h1 {
+        color: #1a1a1a;
+        font-size: 28px;
+        margin-bottom: 10px;
+      }
+
+      .logo p {
+        color: #666;
+        font-size: 14px;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+        color: #1a1a1a;
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      input {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #e1e1e1;
+        border-radius: 6px;
+        font-size: 14px;
+        transition: border-color 0.3s ease;
+      }
+
+      input:focus {
+        outline: none;
+        border-color: #667eea;
+      }
+
+      .error {
+        color: #dc2626;
+        font-size: 12px;
+        margin-top: 4px;
+        display: none;
+      }
+
+      .error.show {
+        display: block;
+      }
+
+      button {
+        width: 100%;
+        padding: 12px;
+        background: #667eea;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+
+      button:hover {
+        background: #5a67d8;
+      }
+
+      button:disabled {
+        background: #93c5fd;
+        cursor: not-allowed;
+      }
+
+      .alert {
+        padding: 12px;
+        border-radius: 6px;
+        margin-bottom: 20px;
+        font-size: 14px;
+      }
+
+      .alert-error {
+        background: #fee2e2;
+        color: #991b1b;
+      }
+
+      .alert-success {
+        background: #dcfce7;
+        color: #166534;
+      }
+
+      #alertBox {
+        display: none;
+      }
+
+      .debug-info {
+        margin-top: 10px;
+        padding: 10px;
+        background: #f3f4f6;
+        border-radius: 4px;
+        font-size: 12px;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="logo">
+        <h1>Welcome Back</h1>
+        <p>Please enter your credentials to continue</p>
+      </div>
+
+      <form id="loginForm" novalidate>
+        <div id="alertBox" class="alert"></div>
+        <div id="debugInfo" class="debug-info"></div>
+
+        <div class="form-group">
+          <label for="username">Username or Email</label>
+          <input type="text" id="username" name="username" required />
+          <div class="error"></div>
         </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required />
+          <div class="error"></div>
+        </div>
+
+        <button type="submit">Log In</button>
+      </form>
+
+      <div class="footer" style="margin-top: 20px; text-align: center">
+        <a href="signup.html" style="color: #667eea; text-decoration: none"
+          >Don't have an account? Sign up</a
+        >
+      </div>
     </div>
 
     <script>
-        function showLogin() {
-            document.getElementById('loginForm').classList.remove('hidden');
-            document.getElementById('signupForm').classList.add('hidden');
-            document.getElementById('loginTab').classList.add('border-purple-600');
-            document.getElementById('signupTab').classList.remove('border-purple-600');
+      class LoginForm {
+        constructor() {
+          this.form = document.getElementById("loginForm");
+          this.submitButton = this.form.querySelector('button[type="submit"]');
+          this.alertBox = document.getElementById("alertBox");
+          this.debugInfo = document.getElementById("debugInfo");
+          this.apiUrl = "http://localhost/Najeekai/api/login.php"; // Change this to match your PHP file location
+
+          this.init();
         }
 
-        function showSignup() {
-            document.getElementById('loginForm').classList.add('hidden');
-            document.getElementById('signupForm').classList.remove('hidden');
-            document.getElementById('loginTab').classList.remove('border-purple-600');
-            document.getElementById('signupTab').classList.add('border-purple-600');
+        init() {
+          this.form.addEventListener("submit", (e) => this.handleSubmit(e));
+          this.form.addEventListener("input", (e) => this.handleInput(e));
         }
 
-        function validateLogin(event) {
-            event.preventDefault();
-            let isValid = true;
-            
-            const email = document.getElementById('loginEmail');
-            const password = document.getElementById('loginPassword');
-            
-            if (!email.value.trim()) {
-                showError('loginEmail', 'Email is required');
-                isValid = false;
-            } else if (/^\d+$/.test(email.value)) {
-                showError('loginEmail', 'Email cannot contain only numbers');
-                isValid = false;
-            } else {
-                hideError('loginEmail');
-            }
+        validateField(input) {
+          const { name, value } = input;
 
-            if (!password.value) {
-                showError('loginPassword', 'Password is required');
-                isValid = false;
-            } else {
-                hideError('loginPassword');
-            }
-            if (isValid) {
-        console.log('Signup Form Submission:', {
-            email: document.getElementById('loginEmail').value,
-            password: document.getElementById('loginPassword').value,
-        });
-    }
+          if (!value.trim()) {
+            this.showError(
+              input,
+              `${name.charAt(0).toUpperCase() + name.slice(1)} is required`
+            );
+            return false;
+          }
 
-            return isValid;
+          this.clearError(input);
+          return true;
         }
 
-        function validateSignup(event) {
-            event.preventDefault();
-            let isValid = true;
-
-            if (!document.getElementById('firstName').value.trim()) {
-                showError('firstName', 'First name is required');
-                isValid = false;
-            } else {
-                hideError('firstName');
-            }
-
-            if (!document.getElementById('lastName').value.trim()) {
-                showError('lastName', 'Last name is required');
-                isValid = false;
-            } else {
-                hideError('lastName');
-            }
-
-            const signupUsername = document.getElementById('signupUsername');
-            if (!signupUsername.value.trim()) {
-                showError('signupUsername', 'Username is required');
-                isValid = false;
-            } else if (/^\d+$/.test(signupUsername.value)) {
-                showError('signupUsername', 'Username cannot contain only numbers');
-                isValid = false;
-            } else {
-                hideError('signupUsername');
-            }
-
-            const email = document.getElementById('email');
-            if (!email.value) {
-                showError('email', 'Email is required');
-                isValid = false;
-            } else if (!email.value.match(/^[^\s@]+@(gmail|yahoo|outlook|hotmail)\.(com|net|org)$/i)) {
-                showError('email', 'Please enter a valid email address');
-                isValid = false;
-            } else {
-                hideError('email');
-            }
-
-            if (!document.getElementById('signupPassword').value) {
-                showError('signupPassword', 'Password is required');
-                isValid = false;
-            } else {
-                hideError('signupPassword');
-            }
-
-            if (!document.getElementById('userType').value) {
-                showError('userType', 'Please select user type');
-                isValid = false;
-            } else {
-                hideError('userType');
-            }
-
-            if (isValid) {
-        console.log('Signup Form Submission:', {
-            firstName: document.getElementById('firstName').value,
-            lastName: document.getElementById('lastName').value,
-            middleName: document.getElementById('middleName').value,
-            username: document.getElementById('signupUsername').value,
-            email: document.getElementById('email').value,
-            password: document.getElementById('signupPassword').value,
-            userType: document.getElementById('userType').value
-        });
-    }
-
-
-            return isValid;
+        showError(input, message) {
+          const errorDiv = input.nextElementSibling;
+          errorDiv.textContent = message;
+          errorDiv.classList.add("show");
         }
 
-        function showError(fieldId, message) {
-            const errorSpan = document.getElementById(fieldId + 'Error');
-            errorSpan.textContent = message;
-            errorSpan.classList.remove('hidden');
+        clearError(input) {
+          const errorDiv = input.nextElementSibling;
+          errorDiv.textContent = "";
+          errorDiv.classList.remove("show");
         }
 
-        function hideError(fieldId) {
-            const errorSpan = document.getElementById(fieldId + 'Error');
-            errorSpan.classList.add('hidden');
+        showAlert(message, type = "error") {
+          this.alertBox.textContent = message;
+          this.alertBox.className = `alert alert-${type}`;
+          this.alertBox.style.display = "block";
         }
+
+        showDebugInfo(info) {
+          this.debugInfo.textContent = JSON.stringify(info, null, 2);
+          this.debugInfo.style.display = "block";
+        }
+
+        clearAlert() {
+          this.alertBox.textContent = "";
+          this.alertBox.style.display = "none";
+          this.debugInfo.style.display = "none";
+        }
+
+        handleInput(e) {
+          if (e.target.tagName === "INPUT") {
+            this.validateField(e.target);
+            this.clearAlert();
+          }
+        }
+
+        async handleSubmit(e) {
+          e.preventDefault();
+          this.clearAlert();
+
+          const username = this.form.username.value.trim();
+          const password = this.form.password.value.trim();
+
+          if (
+            !this.validateField(this.form.username) ||
+            !this.validateField(this.form.password)
+          ) {
+            return;
+          }
+
+          try {
+            this.submitButton.disabled = true;
+            this.submitButton.textContent = "Logging in...";
+
+            const response = await fetch(this.apiUrl, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ username, password }),
+            });
+
+            const data = await response.json();
+
+            // Debug information
+            console.log("Response:", {
+              status: response.status,
+              data: data,
+            });
+
+            if (!response.ok) {
+              throw new Error(data.message || "Login failed");
+            }
+
+            if (data.status === "success") {
+              // Show success message
+              this.showAlert("Login successful! Redirecting...", "success");
+
+              // Store the auth token
+              localStorage.setItem("authToken", data.authToken);
+
+              // Redirect based on user type after a brief delay
+              setTimeout(() => {
+                if (data.userType === "freelancer") {
+                  window.location.href = "index.html";
+                } else {
+                  window.location.href = "index.html";
+                }
+              }, 1000);
+            } else {
+              throw new Error(data.message || "Invalid credentials");
+            }
+          } catch (error) {
+            console.error("Login error:", error);
+            this.showAlert(error.message);
+
+            // Show technical details if available
+            if (error.response) {
+              this.showDebugInfo({
+                status: error.response.status,
+                statusText: error.response.statusText,
+                error: error.message,
+              });
+            }
+          } finally {
+            this.submitButton.disabled = false;
+            this.submitButton.textContent = "Log In";
+          }
+        }
+      }
+
+      // Initialize the form
+      new LoginForm();
     </script>
-</body>
+  </body>
 </html>
