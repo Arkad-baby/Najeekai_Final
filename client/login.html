@@ -149,8 +149,8 @@
         <div id="debugInfo" class="debug-info"></div>
 
         <div class="form-group">
-          <label for="username">Username or Email</label>
-          <input type="text" id="username" name="username" required />
+          <label for="email">Email</label>
+          <input type="text" id="email" name="email" required />
           <div class="error"></div>
         </div>
 
@@ -242,11 +242,11 @@
           e.preventDefault();
           this.clearAlert();
 
-          const username = this.form.username.value.trim();
+          const email = this.form.email.value.trim();
           const password = this.form.password.value.trim();
 
           if (
-            !this.validateField(this.form.username) ||
+            !this.validateField(this.form.email) ||
             !this.validateField(this.form.password)
           ) {
             return;
@@ -261,7 +261,7 @@
               headers: {
                 "Content-Type": "application/json",
               },
-              body: JSON.stringify({ username, password }),
+              body: JSON.stringify({ email, password }),
             });
 
             const data = await response.json();

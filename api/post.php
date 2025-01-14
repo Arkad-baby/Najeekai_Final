@@ -30,23 +30,37 @@ switch ($method) {
 
             $stmt->close();
         } 
-        else if(isset($_GET['term'])){
-            $stmt = $conn->prepare("SELECT * FROM post WHERE id = ?");
-            $stmt->bind_param("i", $id);
+        else if (isset($_GET['term'])) {
+            // Sanitize user input
+            $term = trim($_GET['term']);
+        
+            // Use a more flexible search query with LIKE for partial matches
+            $stmt = $conn->prepare("SELECT * FROM post WHERE caption LIKE ?");
+            $searchTerm = "%" . $term . "%"; // Allow partial matches
+            $stmt->bind_param("s", $searchTerm);
             $stmt->execute();
+        
+            // Fetch all matching rows
             $result = $stmt->get_result();
-            $data = $result->fetch_assoc();
-
-            if ($data) {
+            $data = $result->fetch_all(MYSQLI_ASSOC);
+        
+            if (!empty($data)) {
                 http_response_code(200);
-                echo json_encode(["status" => "success", "data" => $data]);
+                echo json_encode([
+                    "status" => "success",
+                    "data" => $data
+                ]);
             } else {
                 http_response_code(404); // Not Found
-                echo json_encode(["status" => "error", "message" => "Post not found"]);
+                echo json_encode([
+                    "status" => "error",
+                    "message" => "No posts found for the given term"
+                ]);
             }
-
+        
             $stmt->close();
         }
+        
         else {
             $result = $conn->query("SELECT * FROM post");
             $posts = [];

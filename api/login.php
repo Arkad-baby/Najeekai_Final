@@ -29,17 +29,17 @@ try {
     $input = file_get_contents('php://input');
     $data = json_decode($input, true);
 
-    if (!isset($data['username']) || !isset($data['password'])) {
-        throw new Exception("Username and password are required");
+    if (!isset($data['email']) || !isset($data['password'])) {
+        throw new Exception("email and password are required");
     }
 
-    $username = $conn->real_escape_string(trim($data['username']));
+    $email = $conn->real_escape_string(trim($data['email']));
     $password = trim($data['password']);
 
     // First check customer table
-    $query = "SELECT * FROM customer WHERE username = ? OR email = ?";
+    $query = "SELECT * FROM customer WHERE  email = ?";
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("ss", $username, $username);
+    $stmt->bind_param("s", $email);
     $stmt->execute();
     $result = $stmt->get_result();
     $user = $result->fetch_assoc();
@@ -47,9 +47,9 @@ try {
 
     // If not found in customer table, check freelancer table
     if (!$user) {
-        $query = "SELECT * FROM freelancer WHERE username = ? OR email = ?";
+        $query = "SELECT * FROM freelancer WHERE email = ?";
         $stmt = $conn->prepare($query);
-        $stmt->bind_param("ss", $username, $username);
+        $stmt->bind_param("s", $email);
         $stmt->execute();
         $result = $stmt->get_result();
         $user = $result->fetch_assoc();
@@ -57,7 +57,7 @@ try {
     }
 
     if (!$user || !password_verify($password, $user['password'])) {
-        throw new Exception("Invalid username/email or password");
+        throw new Exception("Invalid email or password");
     }
 
     // Generate JWT token
