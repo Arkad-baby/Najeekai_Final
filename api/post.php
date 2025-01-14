@@ -11,7 +11,9 @@ $method = $_SERVER['REQUEST_METHOD'];
 $input = json_decode(file_get_contents('php://input'), true);
 
 switch ($method) {
+
     case 'GET':
+        $customerId = $input['customerId'] ?? null;
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
             $stmt = $conn->prepare("SELECT * FROM post WHERE id = ?");
@@ -55,6 +57,32 @@ switch ($method) {
                 echo json_encode([
                     "status" => "error",
                     "message" => "No posts found for the given term"
+                ]);
+            }
+        
+            $stmt->close();
+        }
+
+        else if ($customerId) {
+          
+            $postsOfCustomer = [];
+            // Use a more flexible search query with LIKE for partial matches
+            $stmt = $conn->prepare("SELECT * FROM post WHERE customerId = ?");
+            $stmt->bind_param("s", $customerId);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            while ($row = $result->fetch_assoc()) {
+                $posts[] = $row;
+            }
+        
+            if (!empty($posts)) {
+                http_response_code(200);
+                echo json_encode(["status" => "success", "data" => $posts]);
+            } else {
+                http_response_code(404); // Not Found
+                echo json_encode([
+                    "status" => "error",
+                    "message" => "No posts found for the given customer"
                 ]);
             }
         

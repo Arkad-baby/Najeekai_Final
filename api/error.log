@@ -1,0 +1,139 @@
+[14-Jan-2025 06:13:25 Europe/Berlin] Authorization Header: Array
+(
+    [User-Agent] => PostmanRuntime/7.43.0
+    [Accept] => */*
+    [Cache-Control] => no-cache
+    [Postman-Token] => 79832333-c7d5-4f0f-98a9-d159bc9b9bac
+    [Host] => localhost
+    [Accept-Encoding] => gzip, deflate, br
+    [Connection] => keep-alive
+)
+
+[14-Jan-2025 06:13:25 Europe/Berlin] Error in API: No token provided
+[14-Jan-2025 06:18:11 Europe/Berlin] Error in API: Duplicate entry 'Test_User' for key 'username'
+[14-Jan-2025 06:18:42 Europe/Berlin] Authorization Header: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [sec-ch-ua-platform] => "Windows"
+    [Authorization] => Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IktyaXRhbjIzMzIiLCJlbWFpbCI6ImtyaXRhbjIyQGdtYWlsLmNvbSJ9.h8HCf1kO4BivD2Wbrlh8H0XbB3sbIkRfNtcsZZmDKhM, Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IktyaXRhbjIzMzIiLCJlbWFpbCI6ImtyaXRhbjIyQGdtYWlsLmNvbSJ9.h8HCf1kO4BivD2Wbrlh8H0XbB3sbIkRfNtcsZZmDKhM
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+    [sec-ch-ua] => "Brave";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+    [Content-Type] => application/json
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Sec-GPC] => 1
+    [Accept-Language] => en-US,en
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/Najeekai/client/profile.html
+    [Accept-Encoding] => gzip, deflate, br, zstd
+)
+
+[14-Jan-2025 06:18:42 Europe/Berlin] Error in API: Invalid token: Invalid signature: Token has been tampered with!
+[14-Jan-2025 06:18:58 Europe/Berlin] Authorization Header: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [sec-ch-ua-platform] => "Android"
+    [Authorization] => Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IktyaXRhbjIzMzIiLCJlbWFpbCI6ImtyaXRhbjIyQGdtYWlsLmNvbSJ9.h8HCf1kO4BivD2Wbrlh8H0XbB3sbIkRfNtcsZZmDKhM, Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IktyaXRhbjIzMzIiLCJlbWFpbCI6ImtyaXRhbjIyQGdtYWlsLmNvbSJ9.h8HCf1kO4BivD2Wbrlh8H0XbB3sbIkRfNtcsZZmDKhM
+    [User-Agent] => Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Mobile Safari/537.36
+    [sec-ch-ua] => "Brave";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+    [Content-Type] => application/json
+    [sec-ch-ua-mobile] => ?1
+    [Accept] => */*
+    [Sec-GPC] => 1
+    [Accept-Language] => en-US,en
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/Najeekai/client/profile.html
+    [Accept-Encoding] => gzip, deflate, br, zstd
+)
+
+[14-Jan-2025 06:18:58 Europe/Berlin] Error in API: Invalid token: Invalid signature: Token has been tampered with!
+[14-Jan-2025 06:23:49 Europe/Berlin] Authorization Header: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [sec-ch-ua-platform] => "Windows"
+    [Authorization] => Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6InJhbSIsImVtYWlsIjoicmFtMjJAZ21haWwuY29tIn0.VxtRpbq0per7TOXFHaiGiCWVQ7y9DHxjjpKbS9TTZR0, Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6InJhbSIsImVtYWlsIjoicmFtMjJAZ21haWwuY29tIn0.VxtRpbq0per7TOXFHaiGiCWVQ7y9DHxjjpKbS9TTZR0
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+    [sec-ch-ua] => "Brave";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+    [Content-Type] => application/json
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Sec-GPC] => 1
+    [Accept-Language] => en-US,en
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/Najeekai/client/profile.html
+    [Accept-Encoding] => gzip, deflate, br, zstd
+)
+
+[14-Jan-2025 06:23:49 Europe/Berlin] Error in API: Invalid token: Invalid signature: Token has been tampered with!
+[14-Jan-2025 06:24:03 Europe/Berlin] Authorization Header: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [sec-ch-ua-platform] => "Android"
+    [Authorization] => Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6InJhbSIsImVtYWlsIjoicmFtMjJAZ21haWwuY29tIn0.VxtRpbq0per7TOXFHaiGiCWVQ7y9DHxjjpKbS9TTZR0, Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6InJhbSIsImVtYWlsIjoicmFtMjJAZ21haWwuY29tIn0.VxtRpbq0per7TOXFHaiGiCWVQ7y9DHxjjpKbS9TTZR0
+    [User-Agent] => Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Mobile Safari/537.36
+    [sec-ch-ua] => "Brave";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+    [Content-Type] => application/json
+    [sec-ch-ua-mobile] => ?1
+    [Accept] => */*
+    [Sec-GPC] => 1
+    [Accept-Language] => en-US,en
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/Najeekai/client/profile.html
+    [Accept-Encoding] => gzip, deflate, br, zstd
+)
+
+[14-Jan-2025 06:24:03 Europe/Berlin] Error in API: Invalid token: Invalid signature: Token has been tampered with!
+[14-Jan-2025 06:26:04 Europe/Berlin] Authorization Header: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [sec-ch-ua-platform] => "Windows"
+    [Authorization] => Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6InJhbSIsImVtYWlsIjoicmFtMjJAZ21haWwuY29tIn0.VxtRpbq0per7TOXFHaiGiCWVQ7y9DHxjjpKbS9TTZR0, Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6InJhbSIsImVtYWlsIjoicmFtMjJAZ21haWwuY29tIn0.VxtRpbq0per7TOXFHaiGiCWVQ7y9DHxjjpKbS9TTZR0
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+    [sec-ch-ua] => "Brave";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+    [Content-Type] => application/json
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Sec-GPC] => 1
+    [Accept-Language] => en-US,en
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/Najeekai/client/profile.html
+    [Accept-Encoding] => gzip, deflate, br, zstd
+)
+
+[14-Jan-2025 06:26:04 Europe/Berlin] Error in API: Invalid token: Invalid signature: Token has been tampered with!
+[14-Jan-2025 06:26:14 Europe/Berlin] Authorization Header: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [sec-ch-ua-platform] => "Android"
+    [Authorization] => Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6InJhbSIsImVtYWlsIjoicmFtMjJAZ21haWwuY29tIn0.VxtRpbq0per7TOXFHaiGiCWVQ7y9DHxjjpKbS9TTZR0, Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6InJhbSIsImVtYWlsIjoicmFtMjJAZ21haWwuY29tIn0.VxtRpbq0per7TOXFHaiGiCWVQ7y9DHxjjpKbS9TTZR0
+    [User-Agent] => Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Mobile Safari/537.36
+    [sec-ch-ua] => "Brave";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+    [Content-Type] => application/json
+    [sec-ch-ua-mobile] => ?1
+    [Accept] => */*
+    [Sec-GPC] => 1
+    [Accept-Language] => en-US,en
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/Najeekai/client/profile.html
+    [Accept-Encoding] => gzip, deflate, br, zstd
+)
+
+[14-Jan-2025 06:26:14 Europe/Berlin] Error in API: Invalid token: Invalid signature: Token has been tampered with!
