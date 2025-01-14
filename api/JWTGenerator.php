@@ -60,7 +60,7 @@ class JWTGenerator {
         $payload = json_decode(self::base64urlDecode($payloadEncoded), true);
 
         // Verify the signature
-        $expectedSignature = hash_hmac("sha256", $headerEncoded . "." . $payloadEncoded, $secret_key, true);
+        $expectedSignature = hash_hmac("sha256", $headerEncoded . "." . $payloadEncoded, "BNzAj1+RLKV788fjFebJ6g/nEgUNUMjmXXkXrXCQcbA0sKBL9IKomraEbm0LVHC6", true);
         $expectedSignatureEncoded = self::base64urlEncode($expectedSignature);
 
         if ($signatureEncoded !== $expectedSignatureEncoded) {
