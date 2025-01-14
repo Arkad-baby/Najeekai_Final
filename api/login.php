@@ -1,9 +1,9 @@
 <?php
 error_reporting(E_ALL);
 include 'database.php';
+include 'JWTGenerator.php';  // Make sure to include this
 ini_set('display_errors', 1);
-
-require_once 'JWTGenerator.php';
+require_once 'JWTAuthMiddleware.php';
 
 header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: *");
@@ -22,9 +22,6 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 try {
-   
-
-
     // Get and validate input
     $input = file_get_contents('php://input');
     $data = json_decode($input, true);
@@ -60,9 +57,9 @@ try {
         throw new Exception("Invalid email or password");
     }
 
-    // Generate JWT token
-    $jwt = new JWTGenerator($user['username'], $user['email']);
-    $token = $jwt->generateToken();
+    // Generate JWT token using JWTGenerator
+    $jwtGenerator = new JWTGenerator($user['username'], $user['email']);
+    $token = $jwtGenerator->generateToken();
 
     // Prepare response data
     $responseData = [
