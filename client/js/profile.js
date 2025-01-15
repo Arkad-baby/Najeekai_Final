@@ -133,24 +133,24 @@ class ProfileManager {
       await this.loadUserProfile();
     } catch (error) {
       console.error("Error updating profile:", error);
-      // this.showAlert(error.message || "Failed to update profile", "error");
+      this.showAlert(error.message || "Failed to update profile", "error");
     }
   }
 
-  // showAlert(message, type = "success") {
-  //   this.submitAlert.className =
-  //     "rounded-md p-4 mb-4 " +
-  //     (type === "success"
-  //       ? "bg-green-100 text-green-700"
-  //       : "bg-red-100 text-red-700");
-  //   this.submitAlert.textContent = message;
-  //   this.submitAlert.classList.remove("hidden");
+  showAlert(message, type = "success") {
+    this.submitAlert.className =
+      "rounded-md p-4 mb-4 " +
+      (type === "success"
+        ? "bg-green-100 text-green-700"
+        : "bg-red-100 text-red-700");
+    this.submitAlert.textContent = message;
+    this.submitAlert.classList.remove("hidden");
 
-  //   // Hide alert after 5 seconds
-  //   setTimeout(() => {
-  //     this.submitAlert.classList.add("hidden");
-  //   }, 5000);
-  // }
+    // Hide alert after 5 seconds
+    setTimeout(() => {
+      this.submitAlert.classList.add("hidden");
+    }, 5000);
+  }
 }
 
 // Initialize profile manager when document is ready
@@ -264,9 +264,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const searchTerm = searchInput.value.trim();
     const userType = getUserType();
 
-    if (searchTerm.length < 2) {
-      searchResults.classList.add("hidden");
-      return;
+    if (searchTerm.length >= 2) {
+      // Redirect to search results page
+      window.location.href = `search-results.html?q=${encodeURIComponent(
+        searchTerm
+      )}`;
     }
 
     showLoading();
@@ -308,6 +310,11 @@ document.addEventListener("DOMContentLoaded", function () {
   searchInput.addEventListener("input", function () {
     clearTimeout(debounceTimer);
     debounceTimer = setTimeout(handleSearch, 300);
+  });
+  searchInput.addEventListener("keypress", function (e) {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
   });
 
   // Close search results when clicking outside
