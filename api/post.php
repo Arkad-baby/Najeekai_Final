@@ -1,6 +1,8 @@
 <?php
+error_reporting(E_ALL);
 include 'database.php';
-include 'JWTGenerator.php';
+include 'JWTGenerator.php';  // Make sure to include this
+ini_set('display_errors', 1);
 header("Content-Type: application/json");
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
