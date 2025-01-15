@@ -3,7 +3,7 @@ class ProfileManager {
   constructor() {
     this.profileForm = document.getElementById("profileForm");
     this.submitAlert = document.getElementById("submitAlert");
-    this.userType = localStorage.getItem("userType"); // 'customer' or 'freelancer'
+    this.userType = JSON.parse(localStorage.getItem("userData")).userType;
     this.userData = null;
 
     this.initialize();
@@ -21,6 +21,7 @@ class ProfileManager {
 
   async loadUserProfile() {
     console.log("Loading user profile...");
+    console.log(localStorage.getItem("authToken"));
     try {
       const response = await AuthHandler.makeAuthenticatedRequest(
         "/Najeekai/api/customer.php",
@@ -28,7 +29,7 @@ class ProfileManager {
           method: "GET",
           headers: {
             // 'Content-Type': 'application/json',
-            authorization: `Bearer ${localStorage.getItem("authToken")}`,
+            // authorization: `Bearer ${localStorage.getItem("authToken")}`,
           },
         }
       );

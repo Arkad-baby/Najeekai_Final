@@ -22,6 +22,7 @@ const customerId = JSON.parse(localStorage.getItem("userData")).id;
 // Get user data from localStorage
 const user = JSON.parse(localStorage.getItem("userData"));
 const userType = user ? user.userType : null;
+console.log(userType)
 
 // DOM Elements
 const postsContainer = document.querySelector(".grid.grid-cols-1.gap-4");
@@ -60,7 +61,7 @@ function setupEventListeners() {
 async function fetchPosts(sortBy = "Latest") {
   try {
     let url = `${API_BASE_URL}/post.php`;
-    if (userType === "Customer") {
+    if (userType === "customer") {
       url += `?customerId=${customerId}`;
     }
 
