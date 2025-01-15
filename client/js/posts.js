@@ -61,11 +61,14 @@ function setupEventListeners() {
 async function fetchPosts(sortBy = "Latest") {
   try {
     let url = `${API_BASE_URL}/post.php`;
-    if (userType === "customer") {
-      url += `?customerId=${customerId}`;
-    }
 
-    const response = await fetch(url);
+    const response = await fetch(url,{
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "customerId": customerId,
+      },
+    });
     const result = await response.json();
 
     if (result.status === "success") {
