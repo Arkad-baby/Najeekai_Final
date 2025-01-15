@@ -1,10 +1,19 @@
 <?php
+// Enable error reporting
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+// Start error logging
+ini_set('log_errors', 1);
+ini_set('error_log', 'error.log');
+
 include 'database.php';
 include 'JWTGenerator.php';
+include 'JWTAuthMiddleware.php';
+
 header("Content-Type: application/json");
-header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: POST');
+header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
 header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods');
 
 $method = $_SERVER['REQUEST_METHOD'];
