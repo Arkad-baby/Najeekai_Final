@@ -15,7 +15,6 @@ $input = json_decode(file_get_contents('php://input'), true);
 switch ($method) {
 
     case 'GET':
-        $customerId = $input['customerId'] ?? null;
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
             $stmt = $conn->prepare("SELECT * FROM post WHERE id = ?");
@@ -65,8 +64,8 @@ switch ($method) {
             $stmt->close();
         }
 
-        else if ($customerId) {
-          
+        else if (isset($_GET['customerId'])) {
+            $customerId = $_GET['customerId'];
             $postsOfCustomer = [];
             // Use a more flexible search query with LIKE for partial matches
             $stmt = $conn->prepare("SELECT * FROM post WHERE customerId = ?");
