@@ -22,7 +22,7 @@ const customerId = JSON.parse(localStorage.getItem("userData")).id;
 // Get user data from localStorage
 const user = JSON.parse(localStorage.getItem("userData"));
 const userType = user ? user.userType : null;
-console.log(userType)
+console.log(userType);
 
 // DOM Elements
 const postsContainer = document.querySelector(".grid.grid-cols-1.gap-4");
@@ -62,11 +62,11 @@ async function fetchPosts(sortBy = "Latest") {
   try {
     let url = `${API_BASE_URL}/post.php`;
 
-    const response = await fetch(url,{
+    const response = await fetch(url, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "customerId": customerId,
+        customerId: customerId,
       },
     });
     const result = await response.json();
@@ -279,117 +279,117 @@ const postFormContainer = document.getElementById("postForm"); // Container div
 const postFormElement = document.querySelector("#postForm form"); // Actual form element
 
 function setupEventListeners() {
-    // Form submission handler - use postFormElement instead of postForm
-    postFormElement.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        if (isEditMode) {
-            await updatePost(editPostId);
-        } else {
-            await handlePostSubmission(e);
-        }
-    });
+  // Form submission handler - use postFormElement instead of postForm
+  postFormElement.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (isEditMode) {
+      await updatePost(editPostId);
+    } else {
+      await handlePostSubmission(e);
+    }
+  });
 
-    // Cancel button
-    cancelPostBtn.addEventListener('click', () => {
-        resetForm();
-    });
+  // Cancel button
+  cancelPostBtn.addEventListener("click", () => {
+    resetForm();
+  });
 
-    // Sort selection
-    document.querySelector('select').addEventListener('change', (e) => {
-        const sortBy = e.target.value;
-        fetchPosts(sortBy);
-    });
+  // Sort selection
+  document.querySelector("select").addEventListener("change", (e) => {
+    const sortBy = e.target.value;
+    fetchPosts(sortBy);
+  });
 }
 
 function resetForm() {
-    postFormElement.reset(); // Use the actual form element
-    postFormContainer.classList.add('hidden'); // Hide the container
-    isEditMode = false;
-    editPostId = null;
-    formTitle.textContent = 'Create New Post';
-    submitButton.textContent = 'Create Post';
+  postFormElement.reset(); // Use the actual form element
+  postFormContainer.classList.add("hidden"); // Hide the container
+  isEditMode = false;
+  editPostId = null;
+  formTitle.textContent = "Create New Post";
+  submitButton.textContent = "Create Post";
 }
 
 async function editPost(postId) {
-    try {
-        const response = await fetch(`${API_BASE_URL}/post.php?id=${postId}`);
-        const result = await response.json();
+  try {
+    const response = await fetch(`${API_BASE_URL}/post.php?id=${postId}`);
+    const result = await response.json();
 
-        if (result.status === 'success') {
-            const post = result.data;
-            isEditMode = true;
-            editPostId = postId;
+    if (result.status === "success") {
+      const post = result.data;
+      isEditMode = true;
+      editPostId = postId;
 
-            // Parse the skills string back to array and join with commas
-            let skills = post.requiredSkills;
-            try {
-                skills = JSON.parse(post.requiredSkills).join(', ');
-            } catch (e) {
-                console.warn('Could not parse skills JSON:', e);
-            }
+      // Parse the skills string back to array and join with commas
+      let skills = post.requiredSkills;
+      try {
+        skills = JSON.parse(post.requiredSkills).join(", ");
+      } catch (e) {
+        console.warn("Could not parse skills JSON:", e);
+      }
 
-            // Update form UI
-            formTitle.textContent = 'Edit Post';
-            submitButton.textContent = 'Update Post';
+      // Update form UI
+      formTitle.textContent = "Edit Post";
+      submitButton.textContent = "Update Post";
 
-            // Fill the form with post data
-            document.getElementById('postCaption').value = post.caption;
-            document.getElementById('postDescription').value = post.description;
-            document.getElementById('postRequiredSkills').value = skills;
-            document.getElementById('postLocation').value = post.location;
-            document.getElementById('postEstimatedTime').value = post.estimatedTime;
-            document.getElementById('postRate').value = post.rate;
+      // Fill the form with post data
+      document.getElementById("postCaption").value = post.caption;
+      document.getElementById("postDescription").value = post.description;
+      document.getElementById("postRequiredSkills").value = skills;
+      document.getElementById("postLocation").value = post.location;
+      document.getElementById("postEstimatedTime").value = post.estimatedTime;
+      document.getElementById("postRate").value = post.rate;
 
-            // Show the form
-            postFormContainer.classList.remove('hidden');
-            postFormContainer.scrollIntoView({ behavior: 'smooth' });
-        }
-    } catch (error) {
-        console.error('Error fetching post for edit:', error);
-        showAlert('Error loading post data', 'error');
+      // Show the form
+      postFormContainer.classList.remove("hidden");
+      postFormContainer.scrollIntoView({ behavior: "smooth" });
     }
+  } catch (error) {
+    console.error("Error fetching post for edit:", error);
+    showAlert("Error loading post data", "error");
+  }
 }
 
 async function updatePost(postId) {
-    const formData = {
-        id: postId,
-        caption: document.getElementById('postCaption').value,
-        description: document.getElementById('postDescription').value,
-        requiredSkills: JSON.stringify(
-            document.getElementById('postRequiredSkills').value
-                .split(',')
-                .map(skill => skill.trim())
-        ),
-        location: document.getElementById('postLocation').value,
-        estimatedTime: parseInt(document.getElementById('postEstimatedTime').value),
-        rate: parseInt(document.getElementById('postRate').value),
-        customerId: customerId
-    };
+  const formData = {
+    id: postId,
+    caption: document.getElementById("postCaption").value,
+    description: document.getElementById("postDescription").value,
+    requiredSkills: JSON.stringify(
+      document
+        .getElementById("postRequiredSkills")
+        .value.split(",")
+        .map((skill) => skill.trim())
+    ),
+    location: document.getElementById("postLocation").value,
+    estimatedTime: parseInt(document.getElementById("postEstimatedTime").value),
+    rate: parseInt(document.getElementById("postRate").value),
+    customerId: customerId,
+  };
 
-    try {
-        const response = await fetch(`${API_BASE_URL}/post.php`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(formData)
-        });
+  try {
+    const response = await fetch(`${API_BASE_URL}/post.php`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
 
-        const result = await response.json();
+    const result = await response.json();
 
-        if (result.status === 'success') {
-            showAlert('Post updated successfully', 'success');
-            resetForm();
-            fetchPosts();
-        } else {
-            showAlert(result.message || 'Failed to update post', 'error');
-        }
-    } catch (error) {
-        console.error('Error updating post:', error);
-        showAlert('Error updating post', 'error');
+    if (result.status === "success") {
+      showAlert("Post updated successfully", "success");
+      resetForm();
+      fetchPosts();
+    } else {
+      showAlert(result.message || "Failed to update post", "error");
     }
+  } catch (error) {
+    console.error("Error updating post:", error);
+    showAlert("Error updating post", "error");
+  }
 }
-
 
 function handleUpdateResponse(result) {
   if (result.status === "success") {
