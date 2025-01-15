@@ -716,3 +716,38 @@
     [phoneNumber] => 98878676767
 )
 
+[15-Jan-2025 19:49:59 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: YES) in C:\xampp\htdocs\Najeekai\api\database.php:8
+Stack trace:
+#0 C:\xampp\htdocs\Najeekai\api\database.php(8): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'najeekai')
+#1 C:\xampp\htdocs\Najeekai\api\customer.php(10): include('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\Najeekai\api\database.php on line 8
+[15-Jan-2025 19:54:13 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: YES) in C:\xampp\htdocs\Najeekai\api\database.php:8
+Stack trace:
+#0 C:\xampp\htdocs\Najeekai\api\database.php(8): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'najeekai')
+#1 C:\xampp\htdocs\Najeekai\api\customer.php(10): include('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\Najeekai\api\database.php on line 8
+[15-Jan-2025 19:59:27 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: YES) in C:\xampp\htdocs\Najeekai\api\database.php:8
+Stack trace:
+#0 C:\xampp\htdocs\Najeekai\api\database.php(8): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'najeekai')
+#1 C:\xampp\htdocs\Najeekai\api\customer.php(10): include('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\Najeekai\api\database.php on line 8
+[15-Jan-2025 20:05:20 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: YES) in C:\xampp\htdocs\Najeekai\api\database.php:8
+Stack trace:
+#0 C:\xampp\htdocs\Najeekai\api\database.php(8): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'najeekai')
+#1 C:\xampp\htdocs\Najeekai\api\customer.php(10): include('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\Najeekai\api\database.php on line 8
+[15-Jan-2025 20:12:53 Europe/Berlin] Authorization Header: Array
+(
+    [User-Agent] => PostmanRuntime/7.43.0
+    [Accept] => */*
+    [Postman-Token] => c5876eb4-d6b8-46a5-91a9-69bd286c0b27
+    [Host] => localhost
+    [Accept-Encoding] => gzip, deflate, br
+    [Connection] => keep-alive
+)
+
+[15-Jan-2025 20:12:53 Europe/Berlin] Error in API: No token provided
