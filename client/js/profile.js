@@ -20,7 +20,7 @@ class ProfileManager {
   }
 
   async loadUserProfile() {
-    const userData = JSON.parse(localStorage.getItem("userData")).userType;
+    const userData = JSON.parse(localStorage.getItem("userData"));
     let apiUrl = "";
     if (userData.userType === "customer") {
       apiUrl = `http://localhost/Najeekai/api/customer.php?id=${userData.id}`;
@@ -277,7 +277,7 @@ document.addEventListener("DOMContentLoaded", function () {
     showLoading();
 
     try {
-      console.log(userType)
+      console.log(userType);
       const endpoint =
         userType === "customer"
           ? `http://localhost/Najeekai/api/freelancer.php?skill=${searchTerm}`
