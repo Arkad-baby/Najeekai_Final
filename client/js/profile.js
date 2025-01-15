@@ -202,12 +202,12 @@ document.addEventListener("DOMContentLoaded", function () {
                   </div>
                   <div class="flex-1">
                       <h3 class="text-lg font-medium text-gray-900">${
-                        freelancer.name
+                        freelancer.firstName + " " + freelancer.lastName
                       }</h3>
                       <p class="text-sm text-gray-500">${freelancer.skills}</p>
                       <div class="mt-1 flex items-center text-sm text-gray-500">
                           <i class="fas fa-star text-yellow-400 mr-1"></i>
-                          <span>${freelancer.rating || "4.5"}</span>
+                          <span>${freelancer.rate || "4.5"}</span>
                           <span class="mx-2">•</span>
                           <i class="fas fa-map-marker-alt mr-1"></i>
                           <span>${freelancer.location}</span>
