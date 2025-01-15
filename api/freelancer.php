@@ -29,7 +29,53 @@ switch ($method) {
             }
 
             $stmt->close();
-        } else {
+        }
+        else if (isset($_GET['skill'])) {
+            // Sanitize and validate user input
+            $skill = trim($_GET['skill']);
+            
+            if (!empty($skill)) {
+                // Prepare the SQL statement
+                $stmt = $conn->prepare("SELECT * FROM freelancer WHERE skills LIKE ?");
+                
+                // Use LIKE with wildcards for partial matches
+                $searchTerm = "%" . $skill . "%";
+                $stmt->bind_param("s", $searchTerm);
+                
+                // Execute the query
+                $stmt->execute();
+                
+                // Fetch all matching rows
+                $result = $stmt->get_result();
+                $data = $result->fetch_all(MYSQLI_ASSOC);
+                
+                // Respond with appropriate status and data
+                if (!empty($data)) {
+                    http_response_code(200);
+                    echo json_encode([
+                        "status" => "success",
+                        "data" => $data
+                    ]);
+                } else {
+                    http_response_code(404); // Not Found
+                    echo json_encode([
+                        "status" => "error",
+                        "message" => "No freelancer found for the given skill."
+                    ]);
+                }
+                
+                $stmt->close();
+            } else {
+                // Handle empty skill input
+                http_response_code(400); // Bad Request
+                echo json_encode([
+                    "status" => "error",
+                    "message" => "Skill parameter cannot be empty."
+                ]);
+            }
+        }
+        
+        else {
             $result = $conn->query("SELECT * FROM freelancer");
             $freelancers = [];
 
