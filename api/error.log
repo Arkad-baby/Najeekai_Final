@@ -1549,3 +1549,162 @@ Stack trace:
 )
 
 [15-Jan-2025 21:14:40 Europe/Berlin] Error in API: No token provided
+[15-Jan-2025 21:17:20 Europe/Berlin] Authorization Header: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [sec-ch-ua-platform] => "Windows"
+    [Authorization] => Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImtyaXRhbiIsImVtYWlsIjoia3JpdGFubWFoMjEyMkBnbWFpbC5jb20ifQ.xq3bTatDrp7wQDWAeIooukh3BZg-kH7NVzC8CUpzE4M
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+    [sec-ch-ua] => "Brave";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+    [Content-Type] => application/json
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Sec-GPC] => 1
+    [Accept-Language] => en-US,en
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/najeekai/client/profile.html
+    [Accept-Encoding] => gzip, deflate, br, zstd
+)
+
+[15-Jan-2025 21:17:20 Europe/Berlin] Auth User Data: Array
+(
+    [userName] => kritan
+    [email] => kritanmah2122@gmail.com
+)
+
+[15-Jan-2025 21:17:20 Europe/Berlin] Fetching data for email: kritanmah2122@gmail.com
+[15-Jan-2025 21:17:20 Europe/Berlin] Query result: Array
+(
+    [id] => d841db16-d374-11ef-8935-04bf1b4b15c3
+    [username] => kritan
+    [firstName] => kritan
+    [email] => kritanmah2122@gmail.com
+    [password] => $2y$10$a.3dzNRyGwXhOfr6OE7mqu8prZn5OeHBR7mQ0BfLKNUrOFYDi7UuG
+    [middleName] => 
+    [lastName] => maharaja
+    [address] => 
+    [phoneNumber] => 23434343432
+)
+
+[15-Jan-2025 21:17:25 Europe/Berlin] Authorization Header: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [Content-Length] => 187
+    [sec-ch-ua-platform] => "Windows"
+    [Authorization] => Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImtyaXRhbiIsImVtYWlsIjoia3JpdGFubWFoMjEyMkBnbWFpbC5jb20ifQ.xq3bTatDrp7wQDWAeIooukh3BZg-kH7NVzC8CUpzE4M
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+    [sec-ch-ua] => "Brave";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+    [Content-Type] => application/json
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Sec-GPC] => 1
+    [Accept-Language] => en-US,en
+    [Origin] => http://localhost
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/najeekai/client/profile.html
+    [Accept-Encoding] => gzip, deflate, br, zstd
+)
+
+[15-Jan-2025 21:17:25 Europe/Berlin] Auth User Data: Array
+(
+    [userName] => kritan
+    [email] => kritanmah2122@gmail.com
+)
+
+[15-Jan-2025 21:17:25 Europe/Berlin] PUT Input data: Array
+(
+    [firstName] => kritan
+    [lastName] => maharajan
+    [middleName] => 
+    [username] => kritan
+    [email] => kritanmah2122@gmail.com
+    [phoneNumber] => 23434343432
+    [id] => d841db16-d374-11ef-8935-04bf1b4b15c3
+)
+
+[15-Jan-2025 21:17:32 Europe/Berlin] Authorization Header: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [sec-ch-ua-platform] => "Windows"
+    [Authorization] => Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImtyaXRhbiIsImVtYWlsIjoia3JpdGFubWFoMjEyMkBnbWFpbC5jb20ifQ.xq3bTatDrp7wQDWAeIooukh3BZg-kH7NVzC8CUpzE4M
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+    [sec-ch-ua] => "Brave";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+    [Content-Type] => application/json
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Sec-GPC] => 1
+    [Accept-Language] => en-US,en
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/najeekai/client/profile.html
+    [Accept-Encoding] => gzip, deflate, br, zstd
+)
+
+[15-Jan-2025 21:17:32 Europe/Berlin] Auth User Data: Array
+(
+    [userName] => kritan
+    [email] => kritanmah2122@gmail.com
+)
+
+[15-Jan-2025 21:17:32 Europe/Berlin] Fetching data for email: kritanmah2122@gmail.com
+[15-Jan-2025 21:17:32 Europe/Berlin] Query result: Array
+(
+    [id] => d841db16-d374-11ef-8935-04bf1b4b15c3
+    [username] => kritan
+    [firstName] => kritan
+    [email] => kritanmah2122@gmail.com
+    [password] => $2y$10$a.3dzNRyGwXhOfr6OE7mqu8prZn5OeHBR7mQ0BfLKNUrOFYDi7UuG
+    [middleName] => 
+    [lastName] => maharajan
+    [address] => 
+    [phoneNumber] => 23434343432
+)
+
+[15-Jan-2025 21:17:58 Europe/Berlin] Authorization Header: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [sec-ch-ua-platform] => "Windows"
+    [Authorization] => Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImtyaXRhbiIsImVtYWlsIjoia3JpdGFubWFoMjEyMkBnbWFpbC5jb20ifQ.xq3bTatDrp7wQDWAeIooukh3BZg-kH7NVzC8CUpzE4M
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+    [sec-ch-ua] => "Brave";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+    [Content-Type] => application/json
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Sec-GPC] => 1
+    [Accept-Language] => en-US,en
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/najeekai/client/profile.html
+    [Accept-Encoding] => gzip, deflate, br, zstd
+)
+
+[15-Jan-2025 21:17:58 Europe/Berlin] Auth User Data: Array
+(
+    [userName] => kritan
+    [email] => kritanmah2122@gmail.com
+)
+
+[15-Jan-2025 21:17:58 Europe/Berlin] Fetching data for email: kritanmah2122@gmail.com
+[15-Jan-2025 21:17:58 Europe/Berlin] Query result: Array
+(
+    [id] => d841db16-d374-11ef-8935-04bf1b4b15c3
+    [username] => kritan
+    [firstName] => kritan
+    [email] => kritanmah2122@gmail.com
+    [password] => $2y$10$a.3dzNRyGwXhOfr6OE7mqu8prZn5OeHBR7mQ0BfLKNUrOFYDi7UuG
+    [middleName] => 
+    [lastName] => maharajan
+    [address] => 
+    [phoneNumber] => 23434343432
+)
+
