@@ -272,6 +272,7 @@ document.addEventListener("DOMContentLoaded", function () {
     showLoading();
 
     try {
+      console.log(userType)
       const endpoint =
         userType === "customer"
           ? `http://localhost/Najeekai/api/freelancer.php?skill=${searchTerm}`
