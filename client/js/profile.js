@@ -166,7 +166,7 @@ document.addEventListener("DOMContentLoaded", function () {
   console.log("Search functionality loaded");
   const searchInput = document.getElementById("searchInput");
   console.log("Search input:", searchInput);
-  const searchResults = document.getElementById("searchResults");
+  const searchResults = document.getElementById("searchDropdown");
   let debounceTimer;
 
   // Get user type from localStorage
@@ -195,6 +195,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Create freelancer result card
   function createFreelancerCard(freelancer) {
     return `
+      <a href="view-profile.html?id=${freelancer.id}">
           <div class="p-4 hover:bg-gray-50 cursor-pointer border-b border-gray-200">
               <div class="flex items-center space-x-4">
                   <div class="flex-shrink-0">
@@ -210,17 +211,19 @@ document.addEventListener("DOMContentLoaded", function () {
                           <span>${freelancer.rate || "4.5"}</span>
                           <span class="mx-2">•</span>
                           <i class="fas fa-map-marker-alt mr-1"></i>
-                          <span>${freelancer.location}</span>
+                          <span>${freelancer.address}</span>
                       </div>
                   </div>
               </div>
           </div>
+          </a>
       `;
   }
 
   // Create post result card
   function createPostCard(post) {
     return `
+    <a href="view-post.html?id=${post.id}">
           <div class="p-4 hover:bg-gray-50 cursor-pointer border-b border-gray-200">
               <h3 class="text-lg font-medium text-gray-900">${post.caption}</h3>
               <p class="mt-1 text-sm text-gray-500 line-clamp-2">${post.description}</p>
@@ -238,6 +241,7 @@ document.addEventListener("DOMContentLoaded", function () {
                   </span>
               </div>
           </div>
+          </a>
       `;
   }
 
@@ -313,7 +317,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Event listeners
   searchInput.addEventListener("input", function () {
     clearTimeout(debounceTimer);
-    debounceTimer = setTimeout(handleSearch, 300);
+    debounceTimer = setTimeout(handleSearch, 500);
   });
   // searchInput.addEventListener("keypress", function (e) {
   //   if (e.key === "Enter") {

@@ -30,24 +30,6 @@
             </h2>
           </div>
         </a>
-        <!-- Search Input -->
-        <div class="flex-grow mx-4 max-w-xl relative" id="search-container">
-          <input
-            type="text"
-            id="searchInput"
-            placeholder="Search for services, jobs, or professionals"
-            class="w-full px-4 py-2 pl-10 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
-
-          <!-- Search Results Dropdown -->
-          <div
-            id="searchResults"
-            class="hidden absolute mt-2 w-full bg-white rounded-lg shadow-lg border border-gray-200 max-h-96 overflow-y-auto z-50"
-          >
-            <!-- Results will be inserted here -->
-          </div>
-        </div>
 
         <!-- Icons -->
         <div class="flex items-center space-x-4">
@@ -73,6 +55,24 @@
 
     <!-- Search Results Section -->
     <main class="container mx-auto px-4 pt-24 pb-12">
+      <!-- Search Input -->
+      <div class="flex-grow mt-4 mb-4 max-w-xl relative" id="search-container">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search for services, jobs, or professionals"
+          class="w-full px-4 py-2 pl-10 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+
+        <!-- Search Results Dropdown -->
+        <div
+          id="searchDropdown"
+          class="hidden absolute mt-2 w-full bg-white rounded-lg shadow-lg border border-gray-200 max-h-96 overflow-y-auto z-50"
+        >
+          <!-- Results will be inserted here -->
+        </div>
+      </div>
       <div class="mb-6">
         <h1 class="text-2xl font-bold text-gray-900" id="searchHeader">
           Search Results
@@ -133,15 +133,15 @@
         <!-- Results Grid -->
         <div class="md:col-span-3">
           <div
-            id="searchResultsDropdown"
-            class="hidden absolute mt-2 w-full bg-white rounded-lg shadow-lg border border-gray-200 max-h-96 overflow-y-auto z-50"
+            id="searchResults"
+            class="w-full bg-red-200 rounded-lg shadow-lg border border-gray-200 max-h-96 overflow-y-auto z-50"
           >
             <!-- Results will be inserted here -->
           </div>
         </div>
       </div>
     </main>
-
+    <!-- <script src="./js/profile.js"></script> -->
     <script>
       // Initialize search term from URL
       document.addEventListener("DOMContentLoaded", function () {
