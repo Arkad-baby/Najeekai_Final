@@ -20,19 +20,22 @@ class ProfileManager {
   }
 
   async loadUserProfile() {
-    console.log("Loading user profile...");
-    console.log(localStorage.getItem("authToken"));
+    const userData = JSON.parse(localStorage.getItem("userData")).userType;
+    let apiUrl = "";
+    if (userData.userType === "customer") {
+      apiUrl = `http://localhost/Najeekai/api/customer.php?id=${userData.id}`;
+    } else if (userType === "freelancer") {
+      apiUrl = `http://localhost/Najeekai/api/freelancer.php?id=${userData.id}`;
+    }
+
     try {
-      const response = await AuthHandler.makeAuthenticatedRequest(
-        "/Najeekai/api/customer.php",
-        {
-          method: "GET",
-          headers: {
-            // 'Content-Type': 'application/json',
-            // authorization: `Bearer ${localStorage.getItem("authToken")}`,
-          },
-        }
-      );
+      const response = await AuthHandler.makeAuthenticatedRequest(apiUrl, {
+        method: "GET",
+        headers: {
+          // 'Content-Type': 'application/json',
+          // authorization: `Bearer ${localStorage.getItem("authToken")}`,
+        },
+      });
 
       if (!response.ok) {
         throw new Error("Failed to fetch profile data");
@@ -312,11 +315,11 @@ document.addEventListener("DOMContentLoaded", function () {
     clearTimeout(debounceTimer);
     debounceTimer = setTimeout(handleSearch, 300);
   });
-  searchInput.addEventListener("keypress", function (e) {
-    if (e.key === "Enter") {
-      handleSearch();
-    }
-  });
+  // searchInput.addEventListener("keypress", function (e) {
+  //   if (e.key === "Enter") {
+  //     handleSearch();
+  //   }
+  // });
 
   // Close search results when clicking outside
   document.addEventListener("click", function (event) {
