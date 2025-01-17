@@ -338,3 +338,63 @@ document.addEventListener("DOMContentLoaded", function () {
   // Initial placeholder update
   updatePlaceholder();
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  const userType = JSON.parse(localStorage.getItem("userData")).userType;
+  if (userType === "freelancer") {
+    const postTab = document.getElementById("postTab");
+    postTab.classList.add("hidden");
+  }
+
+  const tabButtons = document.querySelectorAll(".tab-btn");
+  const tabContents = document.querySelectorAll(".tab-content");
+
+  // Function to switch tabs
+  function switchTab(tabId) {
+    // Remove active classes from all buttons
+    tabButtons.forEach((btn) => {
+      btn.classList.remove("text-blue-600", "border-b-2", "border-blue-600");
+      btn.classList.add("text-gray-500");
+    });
+
+    // Add active classes to the selected button
+    const activeButton = document.querySelector(`[data-tab="${tabId}"]`);
+    if (activeButton) {
+      activeButton.classList.add("text-blue-600", "border-b-2", "border-blue-600");
+      activeButton.classList.remove("text-gray-500");
+    }
+
+    // Hide all tab contents
+    tabContents.forEach((content) => {
+      content.classList.add("hidden");
+    });
+
+    // Show selected tab content
+    const selectedTab = document.getElementById(tabId);
+    if (selectedTab) {
+      selectedTab.classList.remove("hidden");
+    }
+  }
+
+  // Handle click events on tab buttons
+  tabButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const tabId = button.getAttribute("data-tab");
+      // Update URL hash without triggering scroll
+      history.pushState(null, null, `#${tabId}`);
+      switchTab(tabId);
+    });
+  });
+
+  // Handle URL hash changes
+  function handleHashChange() {
+    const hash = window.location.hash.slice(1) || "general"; // Default to 'general' if no hash
+    switchTab(hash);
+  }
+
+  // Listen for hash changes
+  window.addEventListener("hashchange", handleHashChange);
+
+  // Handle initial page load
+  handleHashChange();
+});

@@ -348,6 +348,44 @@
 <script src="./js/profile.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
+        try {
+          // Get user data from localStorage
+          const userData = JSON.parse(localStorage.getItem("userData"));
+          const userType = userData?.userType;
+      
+          // Get the buttons container
+          const buttonsContainer = document.querySelector('.flex.space-x-4.w-full');
+          
+          if (buttonsContainer) {
+            // Clear existing buttons
+            buttonsContainer.innerHTML = '';
+            
+            if (userType === "freelancer") {
+              // Freelancer view
+              buttonsContainer.innerHTML = `
+                <a href="search-results.html" class="bg-white text-blue-600 px-6 py-3 rounded-full font-semibold hover:bg-blue-50 transition text-center">
+                  Find Posts
+                </a>
+              `;
+            } else {
+              // Customer view (default)
+              buttonsContainer.innerHTML = `
+                <a href="search-results.html" class="bg-white text-blue-600 px-6 py-3 rounded-full font-semibold hover:bg-blue-50 transition text-center">
+                  Find Professionals
+                </a>
+                <a href="profile.html#posts" class="border border-white text-white px-6 py-3 rounded-full hover:bg-white/20 transition text-center">
+                  Post a Job
+                </a>
+              `;
+            }
+          }
+      
+        } catch (error) {
+          console.error("Error handling user type:", error);
+          // If there's an error, default to customer view
+        }
+      });
+      document.addEventListener("DOMContentLoaded", function () {
         const tabButtons = document.querySelectorAll(".tab-button");
         const customerFlow = document.querySelector(".customer-flow");
         const freelancerFlow = document.querySelector(".freelancer-flow");
