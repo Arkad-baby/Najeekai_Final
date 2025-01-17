@@ -23,7 +23,7 @@ CREATE TABLE freelancer (
     password VARCHAR(255) NOT NULL,
     description TEXT,
     rate FLOAT,
-    skills LONGTEXT 
+    skills LONGTEXT, 
 );
 
 CREATE TABLE post (

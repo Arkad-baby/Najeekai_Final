@@ -1116,3 +1116,995 @@
     [phoneNumber] => 98878676767
 )
 
+[15-Jan-2025 19:49:59 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: YES) in C:\xampp\htdocs\Najeekai\api\database.php:8
+Stack trace:
+#0 C:\xampp\htdocs\Najeekai\api\database.php(8): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'najeekai')
+#1 C:\xampp\htdocs\Najeekai\api\customer.php(10): include('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\Najeekai\api\database.php on line 8
+[15-Jan-2025 19:54:13 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: YES) in C:\xampp\htdocs\Najeekai\api\database.php:8
+Stack trace:
+#0 C:\xampp\htdocs\Najeekai\api\database.php(8): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'najeekai')
+#1 C:\xampp\htdocs\Najeekai\api\customer.php(10): include('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\Najeekai\api\database.php on line 8
+[15-Jan-2025 19:59:27 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: YES) in C:\xampp\htdocs\Najeekai\api\database.php:8
+Stack trace:
+#0 C:\xampp\htdocs\Najeekai\api\database.php(8): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'najeekai')
+#1 C:\xampp\htdocs\Najeekai\api\customer.php(10): include('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\Najeekai\api\database.php on line 8
+[15-Jan-2025 20:05:20 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: YES) in C:\xampp\htdocs\Najeekai\api\database.php:8
+Stack trace:
+#0 C:\xampp\htdocs\Najeekai\api\database.php(8): mysqli->__construct('localhost', 'root', Object(SensitiveParameterValue), 'najeekai')
+#1 C:\xampp\htdocs\Najeekai\api\customer.php(10): include('C:\\xampp\\htdocs...')
+#2 {main}
+  thrown in C:\xampp\htdocs\Najeekai\api\database.php on line 8
+[15-Jan-2025 20:12:53 Europe/Berlin] Authorization Header: Array
+(
+    [User-Agent] => PostmanRuntime/7.43.0
+    [Accept] => */*
+    [Postman-Token] => c5876eb4-d6b8-46a5-91a9-69bd286c0b27
+    [Host] => localhost
+    [Accept-Encoding] => gzip, deflate, br
+    [Connection] => keep-alive
+)
+
+[15-Jan-2025 20:12:53 Europe/Berlin] Error in API: No token provided
+[15-Jan-2025 20:16:01 Europe/Berlin] Authorization Header: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [sec-ch-ua-platform] => "Windows"
+    [Authorization] => Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImtyaXRhbiIsImVtYWlsIjoia3JpdGFubWFoMjEyMkBnbWFpbC5jb20ifQ.xq3bTatDrp7wQDWAeIooukh3BZg-kH7NVzC8CUpzE4M
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+    [sec-ch-ua] => "Brave";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+    [Content-Type] => application/json
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Sec-GPC] => 1
+    [Accept-Language] => en-US,en
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/najeekai/client/profile.html
+    [Accept-Encoding] => gzip, deflate, br, zstd
+)
+
+[15-Jan-2025 20:16:01 Europe/Berlin] Auth User Data: Array
+(
+    [userName] => kritan
+    [email] => kritanmah2122@gmail.com
+)
+
+[15-Jan-2025 20:16:01 Europe/Berlin] Fetching data for email: kritanmah2122@gmail.com
+[15-Jan-2025 20:16:01 Europe/Berlin] Query result: Array
+(
+    [id] => d841db16-d374-11ef-8935-04bf1b4b15c3
+    [username] => kritan
+    [firstName] => kritan
+    [email] => kritanmah2122@gmail.com
+    [password] => $2y$10$a.3dzNRyGwXhOfr6OE7mqu8prZn5OeHBR7mQ0BfLKNUrOFYDi7UuG
+    [middleName] => 
+    [lastName] => mhz
+    [address] => adsdasdasdasd
+    [phoneNumber] => 343434343434
+)
+
+[15-Jan-2025 20:20:47 Europe/Berlin] Authorization Header: Array
+(
+    [User-Agent] => PostmanRuntime/7.43.0
+    [Accept] => */*
+    [Postman-Token] => 3767cbbf-80a7-42b4-a187-0da4a2391d2a
+    [Host] => localhost
+    [Accept-Encoding] => gzip, deflate, br
+    [Connection] => keep-alive
+)
+
+[15-Jan-2025 20:20:47 Europe/Berlin] Error in API: No token provided
+[15-Jan-2025 20:58:17 Europe/Berlin] Authorization Header: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [sec-ch-ua-platform] => "Windows"
+    [Authorization] => Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImtyaXRhbkYiLCJlbWFpbCI6ImtyaXRhbm1haGFyamFuMjJAZ21haWwuY29tIn0.h3fTrIoVTHLIDCzsxbsuLzIJtUu7FM_fItqUvYczhlE
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+    [sec-ch-ua] => "Brave";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+    [Content-Type] => application/json
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Sec-GPC] => 1
+    [Accept-Language] => en-US,en
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/najeekai/client/profile.html
+    [Accept-Encoding] => gzip, deflate, br, zstd
+)
+
+[15-Jan-2025 20:58:17 Europe/Berlin] Auth User Data: Array
+(
+    [userName] => kritanF
+    [email] => kritanmaharjan22@gmail.com
+)
+
+[15-Jan-2025 20:58:17 Europe/Berlin] Fetching data for email: kritanmaharjan22@gmail.com
+[15-Jan-2025 20:58:17 Europe/Berlin] Query result: Array
+(
+    [id] => 1821ace2-d37a-11ef-8935-04bf1b4b15c3
+    [username] => kritanF
+    [firstName] => kritan
+    [email] => kritanmaharjan22@gmail.com
+    [password] => $2y$10$oXGe1EnEf/H1dVotc9uNQO2nHeYiiGG4FD7Xhc6Bd7yvus7PthsoC
+    [middleName] => 
+    [lastName] => asdasd
+    [address] => asdasdasd
+    [phoneNumber] => 435435435435
+)
+
+[15-Jan-2025 21:02:39 Europe/Berlin] Authorization Header: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [sec-ch-ua-platform] => "Windows"
+    [Authorization] => Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImtyaXRhIiwiZW1haWwiOiJrcml0YTIyQGdtYWlsLmNvbSJ9.uxe5LmwXnytQGV1NpVfZi0HljQOpKMnC5LsZB1_vol4
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+    [sec-ch-ua] => "Brave";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+    [Content-Type] => application/json
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Sec-GPC] => 1
+    [Accept-Language] => en-US,en
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/najeekai/client/profile.html
+    [Accept-Encoding] => gzip, deflate, br, zstd
+)
+
+[15-Jan-2025 21:02:39 Europe/Berlin] Auth User Data: Array
+(
+    [userName] => krita
+    [email] => krita22@gmail.com
+)
+
+[15-Jan-2025 21:02:39 Europe/Berlin] Fetching data for email: krita22@gmail.com
+[15-Jan-2025 21:02:39 Europe/Berlin] Query result: 
+[15-Jan-2025 21:07:45 Europe/Berlin] Authorization Header: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [sec-ch-ua-platform] => "Windows"
+    [Authorization] => Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImtyaXRhbiIsImVtYWlsIjoia3JpdGFubWFoMjEyMkBnbWFpbC5jb20ifQ.xq3bTatDrp7wQDWAeIooukh3BZg-kH7NVzC8CUpzE4M
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+    [sec-ch-ua] => "Brave";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+    [Content-Type] => application/json
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Sec-GPC] => 1
+    [Accept-Language] => en-US,en
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/najeekai/client/profile.html
+    [Accept-Encoding] => gzip, deflate, br, zstd
+)
+
+[15-Jan-2025 21:07:45 Europe/Berlin] Auth User Data: Array
+(
+    [userName] => kritan
+    [email] => kritanmah2122@gmail.com
+)
+
+[15-Jan-2025 21:07:45 Europe/Berlin] Fetching data for email: kritanmah2122@gmail.com
+[15-Jan-2025 21:07:45 Europe/Berlin] Query result: Array
+(
+    [id] => d841db16-d374-11ef-8935-04bf1b4b15c3
+    [username] => kritan
+    [firstName] => kritan
+    [email] => kritanmah2122@gmail.com
+    [password] => $2y$10$a.3dzNRyGwXhOfr6OE7mqu8prZn5OeHBR7mQ0BfLKNUrOFYDi7UuG
+    [middleName] => 
+    [lastName] => mhz
+    [address] => adsdasdasdasd
+    [phoneNumber] => 343434343434
+)
+
+[15-Jan-2025 21:07:56 Europe/Berlin] Authorization Header: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [Content-Length] => 187
+    [sec-ch-ua-platform] => "Windows"
+    [Authorization] => Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImtyaXRhbiIsImVtYWlsIjoia3JpdGFubWFoMjEyMkBnbWFpbC5jb20ifQ.xq3bTatDrp7wQDWAeIooukh3BZg-kH7NVzC8CUpzE4M
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+    [sec-ch-ua] => "Brave";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+    [Content-Type] => application/json
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Sec-GPC] => 1
+    [Accept-Language] => en-US,en
+    [Origin] => http://localhost
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/najeekai/client/profile.html
+    [Accept-Encoding] => gzip, deflate, br, zstd
+)
+
+[15-Jan-2025 21:07:56 Europe/Berlin] Auth User Data: Array
+(
+    [userName] => kritan
+    [email] => kritanmah2122@gmail.com
+)
+
+[15-Jan-2025 21:07:56 Europe/Berlin] PUT Input data: Array
+(
+    [firstName] => kritan
+    [lastName] => maharjan
+    [middleName] => 
+    [username] => kritan
+    [email] => kritanmah2122@gmail.com
+    [phoneNumber] => 343434343434
+    [id] => d841db16-d374-11ef-8935-04bf1b4b15c3
+)
+
+[15-Jan-2025 21:08:28 Europe/Berlin] Authorization Header: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [sec-ch-ua-platform] => "Windows"
+    [Authorization] => Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImtyaXRhIiwiZW1haWwiOiJrcml0YTIyQGdtYWlsLmNvbSJ9.uxe5LmwXnytQGV1NpVfZi0HljQOpKMnC5LsZB1_vol4
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+    [sec-ch-ua] => "Brave";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+    [Content-Type] => application/json
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Sec-GPC] => 1
+    [Accept-Language] => en-US,en
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/najeekai/client/profile.html
+    [Accept-Encoding] => gzip, deflate, br, zstd
+)
+
+[15-Jan-2025 21:08:28 Europe/Berlin] Auth User Data: Array
+(
+    [userName] => krita
+    [email] => krita22@gmail.com
+)
+
+[15-Jan-2025 21:08:28 Europe/Berlin] Fetching data for email: krita22@gmail.com
+[15-Jan-2025 21:08:28 Europe/Berlin] Query result: 
+[15-Jan-2025 21:09:04 Europe/Berlin] Authorization Header: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [sec-ch-ua-platform] => "Windows"
+    [Authorization] => Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImtyaXRhbiIsImVtYWlsIjoia3JpdGFubWFoMjEyMkBnbWFpbC5jb20ifQ.xq3bTatDrp7wQDWAeIooukh3BZg-kH7NVzC8CUpzE4M
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+    [sec-ch-ua] => "Brave";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+    [Content-Type] => application/json
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Sec-GPC] => 1
+    [Accept-Language] => en-US,en
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/najeekai/client/profile.html
+    [Accept-Encoding] => gzip, deflate, br, zstd
+)
+
+[15-Jan-2025 21:09:04 Europe/Berlin] Auth User Data: Array
+(
+    [userName] => kritan
+    [email] => kritanmah2122@gmail.com
+)
+
+[15-Jan-2025 21:09:04 Europe/Berlin] Fetching data for email: kritanmah2122@gmail.com
+[15-Jan-2025 21:09:04 Europe/Berlin] Query result: Array
+(
+    [id] => d841db16-d374-11ef-8935-04bf1b4b15c3
+    [username] => kritan
+    [firstName] => kritan
+    [email] => kritanmah2122@gmail.com
+    [password] => $2y$10$a.3dzNRyGwXhOfr6OE7mqu8prZn5OeHBR7mQ0BfLKNUrOFYDi7UuG
+    [middleName] => 
+    [lastName] => maharjan
+    [address] => 
+    [phoneNumber] => 343434343434
+)
+
+[15-Jan-2025 21:09:20 Europe/Berlin] Authorization Header: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [Content-Length] => 182
+    [sec-ch-ua-platform] => "Windows"
+    [Authorization] => Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImtyaXRhbiIsImVtYWlsIjoia3JpdGFubWFoMjEyMkBnbWFpbC5jb20ifQ.xq3bTatDrp7wQDWAeIooukh3BZg-kH7NVzC8CUpzE4M
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+    [sec-ch-ua] => "Brave";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+    [Content-Type] => application/json
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Sec-GPC] => 1
+    [Accept-Language] => en-US,en
+    [Origin] => http://localhost
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/najeekai/client/profile.html
+    [Accept-Encoding] => gzip, deflate, br, zstd
+)
+
+[15-Jan-2025 21:09:20 Europe/Berlin] Auth User Data: Array
+(
+    [userName] => kritan
+    [email] => kritanmah2122@gmail.com
+)
+
+[15-Jan-2025 21:09:20 Europe/Berlin] PUT Input data: Array
+(
+    [firstName] => kritan
+    [lastName] => mjg
+    [middleName] => 
+    [username] => kritan
+    [email] => kritanmah2122@gmail.com
+    [phoneNumber] => 343434343434
+    [id] => d841db16-d374-11ef-8935-04bf1b4b15c3
+)
+
+[15-Jan-2025 21:09:22 Europe/Berlin] Authorization Header: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [sec-ch-ua-platform] => "Windows"
+    [Authorization] => Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImtyaXRhbiIsImVtYWlsIjoia3JpdGFubWFoMjEyMkBnbWFpbC5jb20ifQ.xq3bTatDrp7wQDWAeIooukh3BZg-kH7NVzC8CUpzE4M
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+    [sec-ch-ua] => "Brave";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+    [Content-Type] => application/json
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Sec-GPC] => 1
+    [Accept-Language] => en-US,en
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/najeekai/client/profile.html
+    [Accept-Encoding] => gzip, deflate, br, zstd
+)
+
+[15-Jan-2025 21:09:22 Europe/Berlin] Auth User Data: Array
+(
+    [userName] => kritan
+    [email] => kritanmah2122@gmail.com
+)
+
+[15-Jan-2025 21:09:22 Europe/Berlin] Fetching data for email: kritanmah2122@gmail.com
+[15-Jan-2025 21:09:22 Europe/Berlin] Query result: Array
+(
+    [id] => d841db16-d374-11ef-8935-04bf1b4b15c3
+    [username] => kritan
+    [firstName] => kritan
+    [email] => kritanmah2122@gmail.com
+    [password] => $2y$10$a.3dzNRyGwXhOfr6OE7mqu8prZn5OeHBR7mQ0BfLKNUrOFYDi7UuG
+    [middleName] => 
+    [lastName] => mjg
+    [address] => 
+    [phoneNumber] => 343434343434
+)
+
+[15-Jan-2025 21:10:42 Europe/Berlin] Authorization Header: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [sec-ch-ua-platform] => "Windows"
+    [Authorization] => Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImtyaXRhbiIsImVtYWlsIjoia3JpdGFubWFoMjEyMkBnbWFpbC5jb20ifQ.xq3bTatDrp7wQDWAeIooukh3BZg-kH7NVzC8CUpzE4M
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+    [sec-ch-ua] => "Brave";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+    [Content-Type] => application/json
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Sec-GPC] => 1
+    [Accept-Language] => en-US,en
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/najeekai/client/profile.html
+    [Accept-Encoding] => gzip, deflate, br, zstd
+)
+
+[15-Jan-2025 21:10:42 Europe/Berlin] Auth User Data: Array
+(
+    [userName] => kritan
+    [email] => kritanmah2122@gmail.com
+)
+
+[15-Jan-2025 21:10:42 Europe/Berlin] Fetching data for email: kritanmah2122@gmail.com
+[15-Jan-2025 21:10:42 Europe/Berlin] Query result: Array
+(
+    [id] => d841db16-d374-11ef-8935-04bf1b4b15c3
+    [username] => kritan
+    [firstName] => kritan
+    [email] => kritanmah2122@gmail.com
+    [password] => $2y$10$a.3dzNRyGwXhOfr6OE7mqu8prZn5OeHBR7mQ0BfLKNUrOFYDi7UuG
+    [middleName] => 
+    [lastName] => mjg
+    [address] => 
+    [phoneNumber] => 343434343434
+)
+
+[15-Jan-2025 21:10:49 Europe/Berlin] Authorization Header: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [Content-Length] => 187
+    [sec-ch-ua-platform] => "Windows"
+    [Authorization] => Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImtyaXRhbiIsImVtYWlsIjoia3JpdGFubWFoMjEyMkBnbWFpbC5jb20ifQ.xq3bTatDrp7wQDWAeIooukh3BZg-kH7NVzC8CUpzE4M
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+    [sec-ch-ua] => "Brave";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+    [Content-Type] => application/json
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Sec-GPC] => 1
+    [Accept-Language] => en-US,en
+    [Origin] => http://localhost
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/najeekai/client/profile.html
+    [Accept-Encoding] => gzip, deflate, br, zstd
+)
+
+[15-Jan-2025 21:10:49 Europe/Berlin] Auth User Data: Array
+(
+    [userName] => kritan
+    [email] => kritanmah2122@gmail.com
+)
+
+[15-Jan-2025 21:10:49 Europe/Berlin] PUT Input data: Array
+(
+    [firstName] => kritan
+    [lastName] => maharjan
+    [middleName] => 
+    [username] => kritan
+    [email] => kritanmah2122@gmail.com
+    [phoneNumber] => 343434343434
+    [id] => d841db16-d374-11ef-8935-04bf1b4b15c3
+)
+
+[15-Jan-2025 21:11:01 Europe/Berlin] Authorization Header: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [Content-Length] => 185
+    [sec-ch-ua-platform] => "Windows"
+    [Authorization] => Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImtyaXRhbiIsImVtYWlsIjoia3JpdGFubWFoMjEyMkBnbWFpbC5jb20ifQ.xq3bTatDrp7wQDWAeIooukh3BZg-kH7NVzC8CUpzE4M
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+    [sec-ch-ua] => "Brave";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+    [Content-Type] => application/json
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Sec-GPC] => 1
+    [Accept-Language] => en-US,en
+    [Origin] => http://localhost
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/najeekai/client/profile.html
+    [Accept-Encoding] => gzip, deflate, br, zstd
+)
+
+[15-Jan-2025 21:11:01 Europe/Berlin] Auth User Data: Array
+(
+    [userName] => kritan
+    [email] => kritanmah2122@gmail.com
+)
+
+[15-Jan-2025 21:11:01 Europe/Berlin] PUT Input data: Array
+(
+    [firstName] => kritan
+    [lastName] => maharjan
+    [middleName] => 
+    [username] => kritan
+    [email] => kritanmah2122@gmail.com
+    [phoneNumber] => 2343434343
+    [id] => d841db16-d374-11ef-8935-04bf1b4b15c3
+)
+
+[15-Jan-2025 21:11:02 Europe/Berlin] Authorization Header: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [Content-Length] => 185
+    [sec-ch-ua-platform] => "Windows"
+    [Authorization] => Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImtyaXRhbiIsImVtYWlsIjoia3JpdGFubWFoMjEyMkBnbWFpbC5jb20ifQ.xq3bTatDrp7wQDWAeIooukh3BZg-kH7NVzC8CUpzE4M
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+    [sec-ch-ua] => "Brave";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+    [Content-Type] => application/json
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Sec-GPC] => 1
+    [Accept-Language] => en-US,en
+    [Origin] => http://localhost
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/najeekai/client/profile.html
+    [Accept-Encoding] => gzip, deflate, br, zstd
+)
+
+[15-Jan-2025 21:11:02 Europe/Berlin] Auth User Data: Array
+(
+    [userName] => kritan
+    [email] => kritanmah2122@gmail.com
+)
+
+[15-Jan-2025 21:11:02 Europe/Berlin] PUT Input data: Array
+(
+    [firstName] => kritan
+    [lastName] => maharjan
+    [middleName] => 
+    [username] => kritan
+    [email] => kritanmah2122@gmail.com
+    [phoneNumber] => 2343434343
+    [id] => d841db16-d374-11ef-8935-04bf1b4b15c3
+)
+
+[15-Jan-2025 21:11:02 Europe/Berlin] Error in PUT method: No rows were updated
+[15-Jan-2025 21:11:02 Europe/Berlin] Error in API: No rows were updated
+[15-Jan-2025 21:11:03 Europe/Berlin] Authorization Header: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [Content-Length] => 185
+    [sec-ch-ua-platform] => "Windows"
+    [Authorization] => Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImtyaXRhbiIsImVtYWlsIjoia3JpdGFubWFoMjEyMkBnbWFpbC5jb20ifQ.xq3bTatDrp7wQDWAeIooukh3BZg-kH7NVzC8CUpzE4M
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+    [sec-ch-ua] => "Brave";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+    [Content-Type] => application/json
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Sec-GPC] => 1
+    [Accept-Language] => en-US,en
+    [Origin] => http://localhost
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/najeekai/client/profile.html
+    [Accept-Encoding] => gzip, deflate, br, zstd
+)
+
+[15-Jan-2025 21:11:03 Europe/Berlin] Auth User Data: Array
+(
+    [userName] => kritan
+    [email] => kritanmah2122@gmail.com
+)
+
+[15-Jan-2025 21:11:03 Europe/Berlin] PUT Input data: Array
+(
+    [firstName] => kritan
+    [lastName] => maharjan
+    [middleName] => 
+    [username] => kritan
+    [email] => kritanmah2122@gmail.com
+    [phoneNumber] => 2343434343
+    [id] => d841db16-d374-11ef-8935-04bf1b4b15c3
+)
+
+[15-Jan-2025 21:11:03 Europe/Berlin] Error in PUT method: No rows were updated
+[15-Jan-2025 21:11:03 Europe/Berlin] Error in API: No rows were updated
+[15-Jan-2025 21:11:03 Europe/Berlin] Authorization Header: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [Content-Length] => 185
+    [sec-ch-ua-platform] => "Windows"
+    [Authorization] => Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImtyaXRhbiIsImVtYWlsIjoia3JpdGFubWFoMjEyMkBnbWFpbC5jb20ifQ.xq3bTatDrp7wQDWAeIooukh3BZg-kH7NVzC8CUpzE4M
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+    [sec-ch-ua] => "Brave";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+    [Content-Type] => application/json
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Sec-GPC] => 1
+    [Accept-Language] => en-US,en
+    [Origin] => http://localhost
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/najeekai/client/profile.html
+    [Accept-Encoding] => gzip, deflate, br, zstd
+)
+
+[15-Jan-2025 21:11:03 Europe/Berlin] Auth User Data: Array
+(
+    [userName] => kritan
+    [email] => kritanmah2122@gmail.com
+)
+
+[15-Jan-2025 21:11:03 Europe/Berlin] PUT Input data: Array
+(
+    [firstName] => kritan
+    [lastName] => maharjan
+    [middleName] => 
+    [username] => kritan
+    [email] => kritanmah2122@gmail.com
+    [phoneNumber] => 2343434343
+    [id] => d841db16-d374-11ef-8935-04bf1b4b15c3
+)
+
+[15-Jan-2025 21:11:03 Europe/Berlin] Error in PUT method: No rows were updated
+[15-Jan-2025 21:11:03 Europe/Berlin] Error in API: No rows were updated
+[15-Jan-2025 21:11:03 Europe/Berlin] Authorization Header: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [Content-Length] => 185
+    [sec-ch-ua-platform] => "Windows"
+    [Authorization] => Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImtyaXRhbiIsImVtYWlsIjoia3JpdGFubWFoMjEyMkBnbWFpbC5jb20ifQ.xq3bTatDrp7wQDWAeIooukh3BZg-kH7NVzC8CUpzE4M
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+    [sec-ch-ua] => "Brave";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+    [Content-Type] => application/json
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Sec-GPC] => 1
+    [Accept-Language] => en-US,en
+    [Origin] => http://localhost
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/najeekai/client/profile.html
+    [Accept-Encoding] => gzip, deflate, br, zstd
+)
+
+[15-Jan-2025 21:11:03 Europe/Berlin] Auth User Data: Array
+(
+    [userName] => kritan
+    [email] => kritanmah2122@gmail.com
+)
+
+[15-Jan-2025 21:11:03 Europe/Berlin] PUT Input data: Array
+(
+    [firstName] => kritan
+    [lastName] => maharjan
+    [middleName] => 
+    [username] => kritan
+    [email] => kritanmah2122@gmail.com
+    [phoneNumber] => 2343434343
+    [id] => d841db16-d374-11ef-8935-04bf1b4b15c3
+)
+
+[15-Jan-2025 21:11:03 Europe/Berlin] Error in PUT method: No rows were updated
+[15-Jan-2025 21:11:03 Europe/Berlin] Error in API: No rows were updated
+[15-Jan-2025 21:11:04 Europe/Berlin] Authorization Header: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [Content-Length] => 185
+    [sec-ch-ua-platform] => "Windows"
+    [Authorization] => Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImtyaXRhbiIsImVtYWlsIjoia3JpdGFubWFoMjEyMkBnbWFpbC5jb20ifQ.xq3bTatDrp7wQDWAeIooukh3BZg-kH7NVzC8CUpzE4M
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+    [sec-ch-ua] => "Brave";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+    [Content-Type] => application/json
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Sec-GPC] => 1
+    [Accept-Language] => en-US,en
+    [Origin] => http://localhost
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/najeekai/client/profile.html
+    [Accept-Encoding] => gzip, deflate, br, zstd
+)
+
+[15-Jan-2025 21:11:04 Europe/Berlin] Auth User Data: Array
+(
+    [userName] => kritan
+    [email] => kritanmah2122@gmail.com
+)
+
+[15-Jan-2025 21:11:04 Europe/Berlin] PUT Input data: Array
+(
+    [firstName] => kritan
+    [lastName] => maharjan
+    [middleName] => 
+    [username] => kritan
+    [email] => kritanmah2122@gmail.com
+    [phoneNumber] => 2343434343
+    [id] => d841db16-d374-11ef-8935-04bf1b4b15c3
+)
+
+[15-Jan-2025 21:11:04 Europe/Berlin] Error in PUT method: No rows were updated
+[15-Jan-2025 21:11:04 Europe/Berlin] Error in API: No rows were updated
+[15-Jan-2025 21:11:10 Europe/Berlin] Authorization Header: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [sec-ch-ua-platform] => "Windows"
+    [Authorization] => Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImtyaXRhbiIsImVtYWlsIjoia3JpdGFubWFoMjEyMkBnbWFpbC5jb20ifQ.xq3bTatDrp7wQDWAeIooukh3BZg-kH7NVzC8CUpzE4M
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+    [sec-ch-ua] => "Brave";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+    [Content-Type] => application/json
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Sec-GPC] => 1
+    [Accept-Language] => en-US,en
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/najeekai/client/profile.html
+    [Accept-Encoding] => gzip, deflate, br, zstd
+)
+
+[15-Jan-2025 21:11:10 Europe/Berlin] Auth User Data: Array
+(
+    [userName] => kritan
+    [email] => kritanmah2122@gmail.com
+)
+
+[15-Jan-2025 21:11:10 Europe/Berlin] Fetching data for email: kritanmah2122@gmail.com
+[15-Jan-2025 21:11:10 Europe/Berlin] Query result: Array
+(
+    [id] => d841db16-d374-11ef-8935-04bf1b4b15c3
+    [username] => kritan
+    [firstName] => kritan
+    [email] => kritanmah2122@gmail.com
+    [password] => $2y$10$a.3dzNRyGwXhOfr6OE7mqu8prZn5OeHBR7mQ0BfLKNUrOFYDi7UuG
+    [middleName] => 
+    [lastName] => maharjan
+    [address] => 
+    [phoneNumber] => 2343434343
+)
+
+[15-Jan-2025 21:11:29 Europe/Berlin] Authorization Header: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [sec-ch-ua-platform] => "Windows"
+    [Authorization] => Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImtyaXRhbiIsImVtYWlsIjoia3JpdGFubWFoMjEyMkBnbWFpbC5jb20ifQ.xq3bTatDrp7wQDWAeIooukh3BZg-kH7NVzC8CUpzE4M
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+    [sec-ch-ua] => "Brave";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+    [Content-Type] => application/json
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Sec-GPC] => 1
+    [Accept-Language] => en-US,en
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/najeekai/client/profile.html
+    [Accept-Encoding] => gzip, deflate, br, zstd
+)
+
+[15-Jan-2025 21:11:29 Europe/Berlin] Auth User Data: Array
+(
+    [userName] => kritan
+    [email] => kritanmah2122@gmail.com
+)
+
+[15-Jan-2025 21:11:29 Europe/Berlin] Fetching data for email: kritanmah2122@gmail.com
+[15-Jan-2025 21:11:29 Europe/Berlin] Query result: Array
+(
+    [id] => d841db16-d374-11ef-8935-04bf1b4b15c3
+    [username] => kritan
+    [firstName] => kritan
+    [email] => kritanmah2122@gmail.com
+    [password] => $2y$10$a.3dzNRyGwXhOfr6OE7mqu8prZn5OeHBR7mQ0BfLKNUrOFYDi7UuG
+    [middleName] => 
+    [lastName] => maharjan
+    [address] => 
+    [phoneNumber] => 2343434343
+)
+
+[15-Jan-2025 21:11:46 Europe/Berlin] Authorization Header: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [Content-Length] => 186
+    [sec-ch-ua-platform] => "Windows"
+    [Authorization] => Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImtyaXRhbiIsImVtYWlsIjoia3JpdGFubWFoMjEyMkBnbWFpbC5jb20ifQ.xq3bTatDrp7wQDWAeIooukh3BZg-kH7NVzC8CUpzE4M
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+    [sec-ch-ua] => "Brave";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+    [Content-Type] => application/json
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Sec-GPC] => 1
+    [Accept-Language] => en-US,en
+    [Origin] => http://localhost
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/najeekai/client/profile.html
+    [Accept-Encoding] => gzip, deflate, br, zstd
+)
+
+[15-Jan-2025 21:11:46 Europe/Berlin] Auth User Data: Array
+(
+    [userName] => kritan
+    [email] => kritanmah2122@gmail.com
+)
+
+[15-Jan-2025 21:11:46 Europe/Berlin] PUT Input data: Array
+(
+    [firstName] => kritan
+    [lastName] => maharaja
+    [middleName] => 
+    [username] => kritan
+    [email] => kritanmah2122@gmail.com
+    [phoneNumber] => 23434343432
+    [id] => d841db16-d374-11ef-8935-04bf1b4b15c3
+)
+
+[15-Jan-2025 21:14:40 Europe/Berlin] Authorization Header: Array
+(
+    [User-Agent] => PostmanRuntime/7.43.0
+    [Accept] => */*
+    [Postman-Token] => 8612c33b-5690-43c2-b05a-1c5a688d333e
+    [Host] => localhost
+    [Accept-Encoding] => gzip, deflate, br
+    [Connection] => keep-alive
+)
+
+[15-Jan-2025 21:14:40 Europe/Berlin] Error in API: No token provided
+[15-Jan-2025 21:17:20 Europe/Berlin] Authorization Header: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [sec-ch-ua-platform] => "Windows"
+    [Authorization] => Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImtyaXRhbiIsImVtYWlsIjoia3JpdGFubWFoMjEyMkBnbWFpbC5jb20ifQ.xq3bTatDrp7wQDWAeIooukh3BZg-kH7NVzC8CUpzE4M
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+    [sec-ch-ua] => "Brave";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+    [Content-Type] => application/json
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Sec-GPC] => 1
+    [Accept-Language] => en-US,en
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/najeekai/client/profile.html
+    [Accept-Encoding] => gzip, deflate, br, zstd
+)
+
+[15-Jan-2025 21:17:20 Europe/Berlin] Auth User Data: Array
+(
+    [userName] => kritan
+    [email] => kritanmah2122@gmail.com
+)
+
+[15-Jan-2025 21:17:20 Europe/Berlin] Fetching data for email: kritanmah2122@gmail.com
+[15-Jan-2025 21:17:20 Europe/Berlin] Query result: Array
+(
+    [id] => d841db16-d374-11ef-8935-04bf1b4b15c3
+    [username] => kritan
+    [firstName] => kritan
+    [email] => kritanmah2122@gmail.com
+    [password] => $2y$10$a.3dzNRyGwXhOfr6OE7mqu8prZn5OeHBR7mQ0BfLKNUrOFYDi7UuG
+    [middleName] => 
+    [lastName] => maharaja
+    [address] => 
+    [phoneNumber] => 23434343432
+)
+
+[15-Jan-2025 21:17:25 Europe/Berlin] Authorization Header: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [Content-Length] => 187
+    [sec-ch-ua-platform] => "Windows"
+    [Authorization] => Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImtyaXRhbiIsImVtYWlsIjoia3JpdGFubWFoMjEyMkBnbWFpbC5jb20ifQ.xq3bTatDrp7wQDWAeIooukh3BZg-kH7NVzC8CUpzE4M
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+    [sec-ch-ua] => "Brave";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+    [Content-Type] => application/json
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Sec-GPC] => 1
+    [Accept-Language] => en-US,en
+    [Origin] => http://localhost
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/najeekai/client/profile.html
+    [Accept-Encoding] => gzip, deflate, br, zstd
+)
+
+[15-Jan-2025 21:17:25 Europe/Berlin] Auth User Data: Array
+(
+    [userName] => kritan
+    [email] => kritanmah2122@gmail.com
+)
+
+[15-Jan-2025 21:17:25 Europe/Berlin] PUT Input data: Array
+(
+    [firstName] => kritan
+    [lastName] => maharajan
+    [middleName] => 
+    [username] => kritan
+    [email] => kritanmah2122@gmail.com
+    [phoneNumber] => 23434343432
+    [id] => d841db16-d374-11ef-8935-04bf1b4b15c3
+)
+
+[15-Jan-2025 21:17:32 Europe/Berlin] Authorization Header: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [sec-ch-ua-platform] => "Windows"
+    [Authorization] => Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImtyaXRhbiIsImVtYWlsIjoia3JpdGFubWFoMjEyMkBnbWFpbC5jb20ifQ.xq3bTatDrp7wQDWAeIooukh3BZg-kH7NVzC8CUpzE4M
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+    [sec-ch-ua] => "Brave";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+    [Content-Type] => application/json
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Sec-GPC] => 1
+    [Accept-Language] => en-US,en
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/najeekai/client/profile.html
+    [Accept-Encoding] => gzip, deflate, br, zstd
+)
+
+[15-Jan-2025 21:17:32 Europe/Berlin] Auth User Data: Array
+(
+    [userName] => kritan
+    [email] => kritanmah2122@gmail.com
+)
+
+[15-Jan-2025 21:17:32 Europe/Berlin] Fetching data for email: kritanmah2122@gmail.com
+[15-Jan-2025 21:17:32 Europe/Berlin] Query result: Array
+(
+    [id] => d841db16-d374-11ef-8935-04bf1b4b15c3
+    [username] => kritan
+    [firstName] => kritan
+    [email] => kritanmah2122@gmail.com
+    [password] => $2y$10$a.3dzNRyGwXhOfr6OE7mqu8prZn5OeHBR7mQ0BfLKNUrOFYDi7UuG
+    [middleName] => 
+    [lastName] => maharajan
+    [address] => 
+    [phoneNumber] => 23434343432
+)
+
+[15-Jan-2025 21:17:58 Europe/Berlin] Authorization Header: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [sec-ch-ua-platform] => "Windows"
+    [Authorization] => Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImtyaXRhbiIsImVtYWlsIjoia3JpdGFubWFoMjEyMkBnbWFpbC5jb20ifQ.xq3bTatDrp7wQDWAeIooukh3BZg-kH7NVzC8CUpzE4M
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+    [sec-ch-ua] => "Brave";v="131", "Chromium";v="131", "Not_A Brand";v="24"
+    [Content-Type] => application/json
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Sec-GPC] => 1
+    [Accept-Language] => en-US,en
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/najeekai/client/profile.html
+    [Accept-Encoding] => gzip, deflate, br, zstd
+)
+
+[15-Jan-2025 21:17:58 Europe/Berlin] Auth User Data: Array
+(
+    [userName] => kritan
+    [email] => kritanmah2122@gmail.com
+)
+
+[15-Jan-2025 21:17:58 Europe/Berlin] Fetching data for email: kritanmah2122@gmail.com
+[15-Jan-2025 21:17:58 Europe/Berlin] Query result: Array
+(
+    [id] => d841db16-d374-11ef-8935-04bf1b4b15c3
+    [username] => kritan
+    [firstName] => kritan
+    [email] => kritanmah2122@gmail.com
+    [password] => $2y$10$a.3dzNRyGwXhOfr6OE7mqu8prZn5OeHBR7mQ0BfLKNUrOFYDi7UuG
+    [middleName] => 
+    [lastName] => maharajan
+    [address] => 
+    [phoneNumber] => 23434343432
+)
+

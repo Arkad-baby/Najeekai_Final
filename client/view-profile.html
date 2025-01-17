@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freelancer Profile - Najeekai</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+    <link href="./css/output.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+  <nav class="bg-white shadow-md fixed top-0 left-0 right-0 z-50">
+    <div
+      class="container mx-auto px-4 py-3 flex items-center justify-between"
+    >
+      <!-- Logo -->
+      <a href="/Najeekai/client/index.html">
+        <div class="flex items-center shadow p-1 rounded-md px-2">
+          <img
+            src="./assets/appLogo.png"
+            alt="HomeHelp Logo"
+            class="h-10 w-10 mr-2"
+          />
+          <h2 class="alegreya-sans-sc-medium text-2xl tracking-normal">
+            Najeekai
+          </h2>
+        </div>
+      </a>
+      <!-- Search Input -->
+      <div class="flex-grow mx-4 max-w-xl relative" id="search-container">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search for services, jobs, or professionals"
+          class="w-full px-4 py-2 pl-10 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+
+        <!-- Search Results Dropdown -->
+        <div
+          id="searchResults"
+          class="hidden absolute mt-2 w-full bg-white rounded-lg shadow-lg border border-gray-200 max-h-96 overflow-y-auto z-50"
+        >
+          <!-- Results will be inserted here -->
+        </div>
+      </div>
+
+      <!-- Icons -->
+      <div class="flex items-center space-x-4">
+        <button class="relative">
+          <i
+            class="fas fa-bell text-gray-600 text-xl hover:text-blue-600"
+          ></i>
+          <span
+            class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1"
+            >3</span
+          >
+        </button>
+        <a href="./profile.html">
+          <button>
+            <i
+              class="fas fa-user-circle text-gray-600 text-2xl hover:text-blue-600"
+            ></i>
+          </button>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+    <main class="container mx-auto px-4 pt-24 pb-12">
+        <div id="profileContent" class="max-w-4xl mx-auto">
+            <!-- Content will be loaded dynamically -->
+        </div>
+    </main>
+    <script src="./js/profile.js"></script>
+    <script>
+        async function loadProfile() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const freelancerId = urlParams.get('id');
+            
+            try {
+                const response = await fetch(`http://localhost/Najeekai/api/freelancer.php?id=${freelancerId}`);
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    const freelancer = data.data;
+                    const skills = freelancer.skills.split(',');
+                    
+                    document.getElementById('profileContent').innerHTML = `
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                            <div class="bg-gradient-to-r from-blue-500 to-purple-600 h-24"></div>
+                            <div class="px-8 pb-8">
+                                <div class="flex justify-between relative">
+                                    <div class="flex items-end">
+                                        <div class="bg-white p-2 rounded-full shadow-lg">
+                                            <i class="fas fa-user-circle text-gray-400 text-6xl"></i>
+                                        </div>
+                                        <div class="ml-4 mb-2">
+                                            <h1 class="text-2xl font-bold">${freelancer.firstName} ${freelancer.lastName}</h1>
+                                            <p class="text-gray-600">@${freelancer.username}</p>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4">
+                                        <div class="text-2xl font-bold text-blue-600">$${freelancer.rate}/hr</div>
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+                                    <div>
+                                        <h2 class="text-xl font-semibold mb-4">About Me</h2>
+                                        <p class="text-gray-700">${freelancer.description}</p>
+                                        
+                                        <h2 class="text-xl font-semibold mt-6 mb-4">Contact Information</h2>
+                                        <div class="space-y-2 text-gray-600">
+                                            <div class="flex items-center">
+                                                <i class="fas fa-envelope w-6"></i>
+                                                <span class="ml-2">${freelancer.email}</span>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <i class="fas fa-phone w-6"></i>
+                                                <span class="ml-2">${freelancer.phoneNumber}</span>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <i class="fas fa-map-marker-alt w-6"></i>
+                                                <span class="ml-2">${freelancer.address}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <h2 class="text-xl font-semibold mb-4">Skills</h2>
+                                        <div class="flex flex-wrap gap-2">
+                                            ${skills.map(skill => `
+                                                <span class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-medium">
+                                                    ${skill.trim()}
+                                                </span>
+                                            `).join('')}
+                                        </div>
+
+                                        <div class="mt-8">
+                                            <button class="w-full bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition-colors font-semibold">
+                                                Contact Me
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadProfile);
+    </script>
+</body>
+</html>
