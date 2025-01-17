@@ -163,9 +163,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Search functionality
 document.addEventListener("DOMContentLoaded", function () {
-  console.log("Search functionality loaded");
   const searchInput = document.getElementById("searchInput");
-  console.log("Search input:", searchInput);
   const searchResults = document.getElementById("searchDropdown");
   let debounceTimer;
 
@@ -271,12 +269,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const searchTerm = searchInput.value.trim();
     const userType = getUserType();
 
-    if (searchTerm.length >= 2) {
-      // Redirect to search results page
-      window.location.href = `search-results.html?q=${encodeURIComponent(
-        searchTerm
-      )}`;
-    }
 
     showLoading();
 
@@ -313,17 +305,20 @@ document.addEventListener("DOMContentLoaded", function () {
       searchResults.classList.remove("hidden");
     }
   }
-
+  const searchTerm = searchInput.value.trim();
   // Event listeners
   searchInput.addEventListener("input", function () {
     clearTimeout(debounceTimer);
     debounceTimer = setTimeout(handleSearch, 500);
   });
-  // searchInput.addEventListener("keypress", function (e) {
-  //   if (e.key === "Enter") {
-  //     handleSearch();
-  //   }
-  // });
+
+  searchInput.addEventListener("keypress", function () {
+    if (event.key === "Enter") {
+      window.location.href = `search-results.html?q=${encodeURIComponent(
+        searchTerm
+      )}`;
+    }
+  });
 
   // Close search results when clicking outside
   document.addEventListener("click", function (event) {
@@ -397,4 +392,60 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Handle initial page load
   handleHashChange();
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Function to get initials from name
+  function getInitials(firstName = "", lastName = "") {
+    const firstInitial = firstName ? firstName.charAt(0).toUpperCase() : "";
+    const lastInitial = lastName ? lastName.charAt(0).toUpperCase() : "";
+    return `${firstInitial}${lastInitial}`;
+  }
+
+  // Function to generate a consistent color based on name
+  function generateColorFromName(name) {
+    const colors = [
+      'bg-blue-500', 'bg-purple-500', 'bg-green-500', 
+      'bg-red-500', 'bg-indigo-500', 'bg-pink-500'
+    ];
+    
+    // Simple hash function to get consistent color
+    let hash = 0;
+    for (let i = 0; i < name.length; i++) {
+      hash = name.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    
+    return colors[Math.abs(hash) % colors.length];
+  }
+
+  try {
+    // Get user data from localStorage
+    const userData = JSON.parse(localStorage.getItem("userData")) || {};
+    const { firstName = "", lastName = "" } = userData;
+    const initials = getInitials(firstName, lastName);
+    const colorClass = generateColorFromName(firstName + lastName);
+
+    // Get the avatar container
+    const avatarContainer = document.querySelector('.relative.group');
+    if (avatarContainer) {
+      // Replace the content with initials avatar
+      avatarContainer.innerHTML = `
+        <div class="w-32 h-32 rounded-full border-4 border-white overflow-hidden ${colorClass} flex items-center justify-center">
+          <span class="text-white text-4xl font-bold">${initials}</span>
+        </div>
+      `;
+
+      // Update profile name as well
+      const nameElement = document.querySelector('.text-3xl.font-bold');
+      const usernameElement = document.querySelector('.text-lg.opacity-90');
+      if (nameElement && firstName && lastName) {
+        nameElement.textContent = `${firstName} ${lastName}`;
+      }
+      if (usernameElement && userData.username) {
+        usernameElement.textContent = `@${userData.username}`;
+      }
+    }
+  } catch (error) {
+    console.error("Error setting up profile avatar:", error);
+  }
 });
