@@ -2108,3 +2108,203 @@ Stack trace:
     [phoneNumber] => 23434343432
 )
 
+[17-Jan-2025 16:24:57 Europe/Berlin] Authorization Header: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [sec-ch-ua-platform] => "Windows"
+    [Authorization] => Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IktyaXRhbjIzMzIiLCJlbWFpbCI6ImtyaXRhbjIyQGdtYWlsLmNvbSJ9.h8HCf1kO4BivD2Wbrlh8H0XbB3sbIkRfNtcsZZmDKhM
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36
+    [sec-ch-ua] => "Not A(Brand";v="8", "Chromium";v="132", "Brave";v="132"
+    [Content-Type] => application/json
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Sec-GPC] => 1
+    [Accept-Language] => en-US,en
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/Najeekai/client/profile.html
+    [Accept-Encoding] => gzip, deflate, br, zstd
+)
+
+[17-Jan-2025 16:24:57 Europe/Berlin] Auth User Data: Array
+(
+    [userName] => Kritan2332
+    [email] => kritan22@gmail.com
+)
+
+[17-Jan-2025 16:24:57 Europe/Berlin] Fetching data for email: kritan22@gmail.com
+[17-Jan-2025 16:24:57 Europe/Berlin] Query result: Array
+(
+    [id] => f84715fc-d236-11ef-9690-a8a1592c394e
+    [username] => Kritan2332
+    [firstName] => kritan
+    [email] => kritan22@gmail.com
+    [password] => $2y$10$aS/He4hbBl4KD1ONIBbNY.vKJBIQX4AUTaAu6eHGskHW4JTySYM4C
+    [middleName] => 
+    [lastName] => Hero
+    [address] => Ktm
+    [phoneNumber] => aklsjdlasd
+)
+
+[17-Jan-2025 16:35:30 Europe/Berlin] Authorization Header: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [sec-ch-ua-platform] => "Windows"
+    [Authorization] => Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IktyaXRhbjIzMzIiLCJlbWFpbCI6ImtyaXRhbjIyQGdtYWlsLmNvbSJ9.h8HCf1kO4BivD2Wbrlh8H0XbB3sbIkRfNtcsZZmDKhM
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36
+    [sec-ch-ua] => "Not A(Brand";v="8", "Chromium";v="132", "Brave";v="132"
+    [Content-Type] => application/json
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Sec-GPC] => 1
+    [Accept-Language] => en-US,en
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/Najeekai/client/profile.html
+    [Accept-Encoding] => gzip, deflate, br, zstd
+)
+
+[17-Jan-2025 16:35:30 Europe/Berlin] Auth User Data: Array
+(
+    [userName] => Kritan2332
+    [email] => kritan22@gmail.com
+)
+
+[17-Jan-2025 16:35:30 Europe/Berlin] Fetching data for email: kritan22@gmail.com
+[17-Jan-2025 16:35:30 Europe/Berlin] Query result: Array
+(
+    [id] => f84715fc-d236-11ef-9690-a8a1592c394e
+    [username] => Kritan2332
+    [firstName] => kritan
+    [email] => kritan22@gmail.com
+    [password] => $2y$10$aS/He4hbBl4KD1ONIBbNY.vKJBIQX4AUTaAu6eHGskHW4JTySYM4C
+    [middleName] => 
+    [lastName] => Hero
+    [address] => Ktm
+    [phoneNumber] => aklsjdlasd
+)
+
+[17-Jan-2025 16:37:40 Europe/Berlin] Authorization Header: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [sec-ch-ua-platform] => "Windows"
+    [Authorization] => Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IktyaXRhbjIzMzIiLCJlbWFpbCI6ImtyaXRhbjIyQGdtYWlsLmNvbSJ9.h8HCf1kO4BivD2Wbrlh8H0XbB3sbIkRfNtcsZZmDKhM
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36
+    [sec-ch-ua] => "Not A(Brand";v="8", "Chromium";v="132", "Brave";v="132"
+    [Content-Type] => application/json
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Sec-GPC] => 1
+    [Accept-Language] => en-US,en
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/Najeekai/client/profile.html
+    [Accept-Encoding] => gzip, deflate, br, zstd
+)
+
+[17-Jan-2025 16:37:40 Europe/Berlin] Auth User Data: Array
+(
+    [userName] => Kritan2332
+    [email] => kritan22@gmail.com
+)
+
+[17-Jan-2025 16:37:40 Europe/Berlin] Fetching data for email: kritan22@gmail.com
+[17-Jan-2025 16:37:40 Europe/Berlin] Query result: Array
+(
+    [id] => f84715fc-d236-11ef-9690-a8a1592c394e
+    [username] => Kritan2332
+    [firstName] => kritan
+    [email] => kritan22@gmail.com
+    [password] => $2y$10$aS/He4hbBl4KD1ONIBbNY.vKJBIQX4AUTaAu6eHGskHW4JTySYM4C
+    [middleName] => 
+    [lastName] => Hero
+    [address] => Ktm
+    [phoneNumber] => aklsjdlasd
+)
+
+[17-Jan-2025 16:54:02 Europe/Berlin] Authorization Header: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [sec-ch-ua-platform] => "Windows"
+    [Authorization] => Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IktyaXRhbjIzMzIiLCJlbWFpbCI6ImtyaXRhbjIyQGdtYWlsLmNvbSJ9.h8HCf1kO4BivD2Wbrlh8H0XbB3sbIkRfNtcsZZmDKhM
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36
+    [sec-ch-ua] => "Not A(Brand";v="8", "Chromium";v="132", "Brave";v="132"
+    [Content-Type] => application/json
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Sec-GPC] => 1
+    [Accept-Language] => en-US,en
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/Najeekai/client/profile.html
+    [Accept-Encoding] => gzip, deflate, br, zstd
+)
+
+[17-Jan-2025 16:54:02 Europe/Berlin] Auth User Data: Array
+(
+    [userName] => Kritan2332
+    [email] => kritan22@gmail.com
+)
+
+[17-Jan-2025 16:54:02 Europe/Berlin] Fetching data for email: kritan22@gmail.com
+[17-Jan-2025 16:54:02 Europe/Berlin] Query result: Array
+(
+    [id] => f84715fc-d236-11ef-9690-a8a1592c394e
+    [username] => Kritan2332
+    [firstName] => kritan
+    [email] => kritan22@gmail.com
+    [password] => $2y$10$aS/He4hbBl4KD1ONIBbNY.vKJBIQX4AUTaAu6eHGskHW4JTySYM4C
+    [middleName] => 
+    [lastName] => Hero
+    [address] => Ktm
+    [phoneNumber] => aklsjdlasd
+)
+
+[17-Jan-2025 17:06:07 Europe/Berlin] Authorization Header: Array
+(
+    [Host] => localhost
+    [Connection] => keep-alive
+    [sec-ch-ua-platform] => "Windows"
+    [Authorization] => Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6InNoeWFtIiwiZW1haWwiOiJzaHlhbTIyQGdtYWlsLmNvbSJ9.OvGed7scf0KsZo2PgmAe_X9GIjytdkQOwaBc6RqyScU
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36
+    [sec-ch-ua] => "Not A(Brand";v="8", "Chromium";v="132", "Brave";v="132"
+    [Content-Type] => application/json
+    [sec-ch-ua-mobile] => ?0
+    [Accept] => */*
+    [Sec-GPC] => 1
+    [Accept-Language] => en-US,en
+    [Sec-Fetch-Site] => same-origin
+    [Sec-Fetch-Mode] => cors
+    [Sec-Fetch-Dest] => empty
+    [Referer] => http://localhost/Najeekai/client/profile.html
+    [Accept-Encoding] => gzip, deflate, br, zstd
+)
+
+[17-Jan-2025 17:06:07 Europe/Berlin] Auth User Data: Array
+(
+    [userName] => shyam
+    [email] => shyam22@gmail.com
+)
+
+[17-Jan-2025 17:06:07 Europe/Berlin] Fetching data for email: shyam22@gmail.com
+[17-Jan-2025 17:06:07 Europe/Berlin] Query result: Array
+(
+    [id] => c6a43677-d36a-11ef-adb1-a8a1592c394e
+    [username] => shyam
+    [firstName] => shtya,
+    [email] => shyam22@gmail.com
+    [password] => $2y$10$VFP67rFOI6QYDp43IpiEUup2w/VRFYlNj1QUqlCUK2pRiV3mr4tl2
+    [middleName] => 
+    [lastName] => asfsdf
+    [address] => sdfsdfsdf
+    [phoneNumber] => 98878676767
+)
+
