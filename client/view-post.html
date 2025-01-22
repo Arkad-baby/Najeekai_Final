@@ -69,9 +69,127 @@
         </div>
       </div>
     </nav>
-    <div id="postContent" class="p-4 mt-16"></div>
-    <script src="./js/profile.js"></script>
+
+    <div class="p-4 mt-16">
+      <div id="postContent"></div>
+
+      <div class="mt-8 flex justify-center">
+        <button
+          id="actionButton"
+          class="bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition-colors font-semibold"
+        >
+          Loading...
+        </button>
+      </div>
+    </div>
+    <div id="toast" class="fixed bottom-4 right-4 hidden">
+      <div class="bg-white border-l-4 border-blue-500 rounded-lg shadow-lg p-4">
+        <div id="toastMessage" class="text-gray-800"></div>
+      </div>
+    </div>
     <script>
+      function showToast(message, isError = false) {
+        const toast = document.getElementById("toast");
+        const toastMessage = document.getElementById("toastMessage");
+        toast.className = `fixed bottom-4 right-4 ${
+          isError ? "border-red-500" : "border-blue-500"
+        }`;
+        toastMessage.textContent = message;
+        toast.classList.remove("hidden");
+        setTimeout(() => toast.classList.add("hidden"), 3000);
+      }
+
+      async function checkExistingProposal(postId, freelancerId) {
+        try {
+          const response = await fetch(
+            `http://localhost/Najeekai/api/proposal.php?postId=${postId}&freelancerId=${freelancerId}`
+          );
+          const data = await response.json();
+
+          // Return true if a proposal exists (status is success)
+          return data.status === "success";
+        } catch (error) {
+          console.error("Error checking proposal:", error);
+          return false;
+        }
+      }
+
+      async function setupActionButton() {
+        const actionButton = document.getElementById("actionButton");
+        const urlParams = new URLSearchParams(window.location.search);
+        const postId = urlParams.get("id");
+        const userDataStr = localStorage.getItem("userData");
+
+        if (!userDataStr) {
+          actionButton.textContent = "Login to Apply";
+          actionButton.disabled = true;
+          actionButton.classList.add("bg-gray-400");
+          actionButton.classList.remove("bg-blue-600", "hover:bg-blue-700");
+          return;
+        }
+
+        const userData = JSON.parse(userDataStr);
+        try {
+          const hasProposal = await checkExistingProposal(postId, userData.id);
+
+          if (hasProposal) {
+            actionButton.textContent = "View Proposal";
+            actionButton.onclick = () => {
+              window.location.href = "profile.html#proposals";
+            };
+          } else {
+            actionButton.textContent = "Apply for this Job";
+            actionButton.onclick = submitProposal;
+          }
+        } catch (error) {
+          console.error("Error setting up action button:", error);
+          actionButton.textContent = "Error Loading Status";
+          actionButton.disabled = true;
+          actionButton.classList.add("bg-gray-400");
+          actionButton.classList.remove("bg-blue-600", "hover:bg-blue-700");
+        }
+      }
+      async function submitProposal() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const postId = urlParams.get("id");
+        try {
+          const userDataStr = localStorage.getItem("userData");
+          if (!userDataStr) {
+            showToast("Please login first to submit a proposal", true);
+            return;
+          }
+
+          const userData = JSON.parse(userDataStr);
+          const freelancerId = userData.id;
+
+          const response = await fetch(
+            "http://localhost/Najeekai/api/proposal.php",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                freelancerId: freelancerId,
+                postId: postId,
+              }),
+            }
+          );
+
+          const data = await response.json();
+
+          if (data.status === "success") {
+            showToast("Proposal submitted successfully!");
+            window.location.href = "/profile.html#proposal";
+          } else {
+            showToast(data.message || "Failed to submit proposal", true);
+          }
+        } catch (error) {
+          console.error("Error:", error);
+          showToast("An error occurred while submitting the proposal", true);
+        }
+      }
+
       async function loadPost() {
         const urlParams = new URLSearchParams(window.location.search);
         const postId = urlParams.get("id");
@@ -86,67 +204,66 @@
             const post = data.data;
             const skills = JSON.parse(post.requiredSkills);
 
-            document.getElementById("postContent").innerHTML = `
-                        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
-                            <div class="p-8">
-                                <div class="flex justify-between items-start">
-                                    <div>
-                                        <h1 class="text-3xl font-bold text-gray-900 mb-2">${
-                                          post.caption
-                                        }</h1>
-                                        <div class="flex items-center text-gray-600 mb-6">
-                                            <i class="fas fa-map-marker-alt mr-2"></i>
-                                            <span>${post.location}</span>
-                                            <span class="mx-3">•</span>
-                                            <i class="fas fa-clock mr-2"></i>
-                                            <span>Posted ${new Date(
-                                              post.postedAt
-                                            ).toLocaleDateString()}</span>
-                                        </div>
-                                    </div>
-                                    <div class="text-right">
-                                        <div class="text-3xl font-bold text-blue-600">$${
-                                          post.rate
-                                        }/hr</div>
-                                        <div class="text-gray-600">Est. ${
-                                          post.estimatedTime
-                                        } hours</div>
-                                    </div>
-                                </div>
-
-                                <div class="border-t border-b border-gray-200 py-6 my-6">
-                                    <h2 class="text-xl font-semibold mb-4">Description</h2>
-                                    <p class="text-gray-700 whitespace-pre-line">${
-                                      post.description
-                                    }</p>
-                                </div>
-
-                                <div class="mb-6">
-                                    <h2 class="text-xl font-semibold mb-4">Required Skills</h2>
-                                    <div class="flex flex-wrap gap-2">
-                                        ${skills
-                                          .map(
-                                            (skill) => `
-                                            <span class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-medium">
-                                                ${skill}
-                                            </span>
-                                        `
-                                          )
-                                          .join("")}
-                                    </div>
-                                </div>
-
-                                <div class="mt-8 flex justify-center">
-                                    <button class="bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition-colors font-semibold">
-                                        Apply for this Job
-                                    </button>
-                                </div>
+            document.getElementById(
+              "postContent"
+            ).innerHTML = `<div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                <div class="p-8">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h1 class="text-3xl font-bold text-gray-900 mb-2">${
+                              post.caption
+                            }</h1>
+                            <div class="flex items-center text-gray-600 mb-6">
+                                <i class="fas fa-map-marker-alt mr-2"></i>
+                                <span>${post.location}</span>
+                                <span class="mx-3">•</span>
+                                <i class="fas fa-clock mr-2"></i>
+                                <span>Posted ${new Date(
+                                  post.postedAt
+                                ).toLocaleDateString()}</span>
                             </div>
                         </div>
-                    `;
+                        <div class="text-right">
+                            <div class="text-3xl font-bold text-blue-600">$${
+                              post.rate
+                            }/hr</div>
+                            <div class="text-gray-600">Est. ${
+                              post.estimatedTime
+                            } hours</div>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-b border-gray-200 py-6 my-6">
+                        <h2 class="text-xl font-semibold mb-4">Description</h2>
+                        <p class="text-gray-700 whitespace-pre-line">${
+                          post.description
+                        }</p>
+                    </div>
+
+                    <div class="mb-6">
+                        <h2 class="text-xl font-semibold mb-4">Required Skills</h2>
+                        <div class="flex flex-wrap gap-2">
+                            ${skills
+                              .map(
+                                (skill) => `
+                                <span class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-medium">
+                                    ${skill}
+                                </span>
+                            `
+                              )
+                              .join("")}
+                        </div>
+                    </div>
+
+                </div>
+            </div>`;
+
+            // Setup the action button after loading post
+            await setupActionButton();
           }
         } catch (error) {
           console.error("Error:", error);
+          showToast("Error loading post details", true);
         }
       }
 

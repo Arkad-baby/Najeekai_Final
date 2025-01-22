@@ -136,6 +136,13 @@
             >
               Posts
             </button>
+            <button
+              id="proposalTab"
+              class="tab-btn px-4 py-3 text-gray-500"
+              data-tab="proposals"
+            >
+              Proposals
+            </button>
           </nav>
         </div>
 
@@ -291,6 +298,222 @@
                 </nav>
               </div>
 
+              <!-- Add this inside your tab-content div after other tabs -->
+              <div id="proposals" class="tab-content hidden">
+                <div class="p-6">
+                  <div class="mb-6 flex justify-between items-center">
+                    <h2 class="text-2xl font-semibold text-gray-900">My Proposals</h2>
+                  </div>
+                  
+                  <!-- Loading spinner -->
+                  <div id="proposalsLoading" class="hidden">
+                    <div class="flex justify-center py-12">
+                      <div class="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600"></div>
+                    </div>
+                  </div>
+              
+                  <!-- Proposals content -->
+                  <div id="proposalsContent" class="space-y-4">
+                    <!-- Proposals will be loaded here -->
+                  </div>
+                </div>
+              </div>
+
+              <script>
+                // Add this to your JavaScript
+                function showTab(tabId) {
+                  // Hide all tab contents
+                  document
+                    .querySelectorAll(".tab-content")
+                    .forEach((content) => {
+                      content.classList.add("hidden");
+                    });
+
+                  // Show selected tab content
+                  const selectedTab = document.getElementById(tabId);
+                  if (selectedTab) {
+                    selectedTab.classList.remove("hidden");
+                  }
+
+                  // Update tab button styles
+                  document.querySelectorAll(".tab-btn").forEach((btn) => {
+                    if (btn.getAttribute("data-tab") === tabId) {
+                      btn.classList.add(
+                        "text-blue-600",
+                        "border-b-2",
+                        "border-blue-600"
+                      );
+                      btn.classList.remove("text-gray-500");
+                    } else {
+                      btn.classList.remove(
+                        "text-blue-600",
+                        "border-b-2",
+                        "border-blue-600"
+                      );
+                      btn.classList.add("text-gray-500");
+                    }
+                  });
+                }
+
+                async function loadProposals() {
+                  const userData = JSON.parse(localStorage.getItem("userData"));
+                  const proposalsContent =
+                    document.getElementById("proposalsContent");
+                  const loadingElement =
+                    document.getElementById("proposalsLoading");
+
+                  if (!proposalsContent) {
+                    console.error("proposalsContent element not found");
+                    return;
+                  }
+
+                  // Show loading state
+                  loadingElement.classList.remove("hidden");
+                  proposalsContent.innerHTML = "";
+
+                  if (!userData) {
+                    proposalsContent.innerHTML =
+                      '<p class="text-center text-gray-500 py-8">Please login to view proposals</p>';
+                    loadingElement.classList.add("hidden");
+                    return;
+                  }
+
+                  try {
+                    const endpoint =
+                      userData.userType === "freelancer"
+                        ? `http://localhost/Najeekai/api/proposal.php?freelancerId=${userData.id}`
+                        : `http://localhost/Najeekai/api/proposal.php?postId=${userData.id}`;
+
+                    const response = await fetch(endpoint);
+                    const result = await response.json();
+
+                    loadingElement.classList.add("hidden");
+
+                    if (
+                      result.status === "success" &&
+                      result.data &&
+                      result.data.length > 0
+                    ) {
+                      const proposalCards = result.data
+                        .map(
+                          (proposal) => `
+        <div class="bg-white rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-all p-6">
+          <div class="flex justify-between items-start">
+            <div>
+              <h3 class="text-lg font-semibold">Proposal ID: ${proposal.id}</h3>
+              <p class="text-sm text-gray-600 mt-1">Post ID: ${
+                proposal.postId
+              }</p>
+            </div>
+            <span class="px-3 py-1 rounded-full text-sm font-medium ${
+              proposal.isApproved
+                ? "bg-green-100 text-green-800"
+                : "bg-yellow-100 text-yellow-800"
+            }">
+              ${proposal.isApproved ? "Approved" : "Pending"}
+            </span>
+          </div>
+          
+          ${
+            !proposal.isApproved && userData.userType === "customer"
+              ? `
+            <div class="mt-4 flex justify-end space-x-3">
+              <button onclick="handleProposal('${proposal.id}', 'reject')" 
+                class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50">
+                Reject
+              </button>
+              <button onclick="handleProposal('${proposal.id}', 'approve')" 
+                class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+                Approve
+              </button>
+            </div>
+          `
+              : ""
+          }
+        </div>
+      `
+                        )
+                        .join("");
+
+                      proposalsContent.innerHTML = proposalCards;
+                    } else {
+                      proposalsContent.innerHTML = `
+        <div class="text-center py-8">
+          <p class="text-gray-500">No proposals found</p>
+          <p class="text-sm text-gray-400 mt-2">
+            ${
+              userData.userType === "freelancer"
+                ? "Start applying to jobs to see your proposals here"
+                : "Your posts have not received any proposals yet"
+            }
+          </p>
+        </div>
+      `;
+                    }
+                  } catch (error) {
+                    console.error("Error loading proposals:", error);
+                    loadingElement.classList.add("hidden");
+                    proposalsContent.innerHTML = `
+      <div class="text-center py-8">
+        <p class="text-red-500">Error loading proposals. Please try again later.</p>
+      </div>
+    `;
+                  }
+                }
+
+                async function handleProposal(proposalId, action) {
+                  try {
+                    const response = await fetch(
+                      "http://localhost/Najeekai/api/proposal.php",
+                      {
+                        method: "PUT",
+                        headers: {
+                          "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                          proposalId,
+                          action,
+                          isApproved: action === "approve" ? 1 : 0,
+                        }),
+                      }
+                    );
+
+                    const data = await response.json();
+                    if (data.status === "success") {
+                      loadProposals(); // Reload the proposals
+                    } else {
+                      alert(`Failed to ${action} proposal`);
+                    }
+                  } catch (error) {
+                    console.error("Error handling proposal:", error);
+                    alert("Error updating proposal status");
+                  }
+                }
+
+                // Set up event listeners
+                document.addEventListener("DOMContentLoaded", function () {
+                  const proposalTab = document.querySelector(
+                    '[data-tab="proposals"]'
+                  );
+                  if (proposalTab) {
+                    proposalTab.addEventListener("click", () => {
+                      showTab("proposals");
+                      loadProposals();
+                    });
+                  }
+
+                  // Handle direct navigation to proposals
+                  if (window.location.hash === "#proposal") {
+                    const proposalTab = document.querySelector(
+                      '[data-tab="proposals"]'
+                    );
+                    if (proposalTab) {
+                      proposalTab.click();
+                    }
+                  }
+                });
+              </script>
+
               <!-- Content Area -->
               <div class="p-6">
                 <!-- Action Buttons -->
@@ -440,95 +663,114 @@
               </div>
             </div>
           </div>
+          <div id="proposals" class="tab-content hidden">
+            <div class="p-6">
+              <div class="mb-6 flex justify-between items-center">
+                <h2 class="text-2xl font-semibold text-gray-900">My Proposals</h2>
+              </div>
+              
+              <!-- Loading spinner -->
+              <div id="proposalsLoading" class="hidden">
+                <div class="flex justify-center py-12">
+                  <div class="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600"></div>
+                </div>
+              </div>
+          
+              <!-- Proposals content -->
+              <div id="proposalsContent" class="space-y-4">
+                <!-- Proposals will be loaded here -->
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+    <script src="./js/auth.js"></script>
+    <script src="./js/posts.js"></script>
+    <script src="./js/profile.js"></script>
+    <script>
+      // Tab switching functionality
+      document.addEventListener("DOMContentLoaded", function () {
+        const tabButtons = document.querySelectorAll(".tab-btn");
+
+        tabButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            // Remove active classes from all buttons
+            tabButtons.forEach((btn) => {
+              btn.classList.remove(
+                "text-blue-600",
+                "border-b-2",
+                "border-blue-600"
+              );
+              btn.classList.add("text-gray-500");
+            });
+
+            // Add active classes to clicked button
+            button.classList.add(
+              "text-blue-600",
+              "border-b-2",
+              "border-blue-600"
+            );
+            button.classList.remove("text-gray-500");
+          });
+        });
+
+        // Post form toggle
+        const newPostBtn = document.getElementById("newPostBtn");
+        const postForm = document.getElementById("postForm");
+        const cancelPostBtn = document.getElementById("cancelPost");
+
+        newPostBtn.addEventListener("click", () => {
+          postForm.classList.remove("hidden");
+        });
+
+        cancelPostBtn.addEventListener("click", () => {
+          postForm.classList.add("hidden");
+        });
+      });
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const userType = JSON.parse(localStorage.getItem("userData")).userType;
+        if (userType === "freelancer") {
+          const postTab = document.getElementById("postTab");
+          postTab.classList.add("hidden");
+        }
+
+        const tabButtons = document.querySelectorAll(".tab-btn");
+        const tabContents = document.querySelectorAll(".tab-content");
+
+        tabButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            // Remove active classes from all buttons
+            tabButtons.forEach((btn) => {
+              btn.classList.remove(
+                "text-blue-600",
+                "border-b-2",
+                "border-blue-600"
+              );
+              btn.classList.add("text-gray-500");
+            });
+
+            // Add active classes to clicked button
+            button.classList.add(
+              "text-blue-600",
+              "border-b-2",
+              "border-blue-600"
+            );
+            button.classList.remove("text-gray-500");
+
+            // Hide all tab contents
+            tabContents.forEach((content) => {
+              content.classList.add("hidden");
+            });
+
+            // Show selected tab content
+            const tabId = button.getAttribute("data-tab");
+            document.getElementById(tabId).classList.remove("hidden");
+          });
+        });
+      });
+    </script>
   </body>
-  <script src="./js/auth.js"></script>
-  <script src="./js/posts.js"></script>
-  <script src="./js/profile.js"></script>
-  <script>
-    // Tab switching functionality
-    document.addEventListener("DOMContentLoaded", function () {
-      const tabButtons = document.querySelectorAll(".tab-btn");
-
-      tabButtons.forEach((button) => {
-        button.addEventListener("click", () => {
-          // Remove active classes from all buttons
-          tabButtons.forEach((btn) => {
-            btn.classList.remove(
-              "text-blue-600",
-              "border-b-2",
-              "border-blue-600"
-            );
-            btn.classList.add("text-gray-500");
-          });
-
-          // Add active classes to clicked button
-          button.classList.add(
-            "text-blue-600",
-            "border-b-2",
-            "border-blue-600"
-          );
-          button.classList.remove("text-gray-500");
-        });
-      });
-
-      // Post form toggle
-      const newPostBtn = document.getElementById("newPostBtn");
-      const postForm = document.getElementById("postForm");
-      const cancelPostBtn = document.getElementById("cancelPost");
-
-      newPostBtn.addEventListener("click", () => {
-        postForm.classList.remove("hidden");
-      });
-
-      cancelPostBtn.addEventListener("click", () => {
-        postForm.classList.add("hidden");
-      });
-    });
-  </script>
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const userType = JSON.parse(localStorage.getItem("userData")).userType;
-      if (userType === "freelancer") {
-        const postTab = document.getElementById("postTab");
-        postTab.classList.add("hidden");
-      }
-
-      const tabButtons = document.querySelectorAll(".tab-btn");
-      const tabContents = document.querySelectorAll(".tab-content");
-
-      tabButtons.forEach((button) => {
-        button.addEventListener("click", () => {
-          // Remove active classes from all buttons
-          tabButtons.forEach((btn) => {
-            btn.classList.remove(
-              "text-blue-600",
-              "border-b-2",
-              "border-blue-600"
-            );
-            btn.classList.add("text-gray-500");
-          });
-
-          // Add active classes to clicked button
-          button.classList.add(
-            "text-blue-600",
-            "border-b-2",
-            "border-blue-600"
-          );
-          button.classList.remove("text-gray-500");
-
-          // Hide all tab contents
-          tabContents.forEach((content) => {
-            content.classList.add("hidden");
-          });
-
-          // Show selected tab content
-          const tabId = button.getAttribute("data-tab");
-          document.getElementById(tabId).classList.remove("hidden");
-        });
-      });
-    });
-  </script>
 </html>
