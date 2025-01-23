@@ -59,7 +59,7 @@
               >3</span
             >
           </button>
-          <a href="./profile.html">
+          <a href="profile.html">
             <button>
               <i
                 class="fas fa-user-circle text-gray-600 text-2xl hover:text-blue-600"
@@ -135,7 +135,7 @@
           if (hasProposal) {
             actionButton.textContent = "View Proposal";
             actionButton.onclick = () => {
-              window.location.href = "profile.html#proposals";
+              window.location.href = "profile.html#proposal";
             };
           } else {
             actionButton.textContent = "Apply for this Job";
@@ -180,7 +180,7 @@
 
           if (data.status === "success") {
             showToast("Proposal submitted successfully!");
-            window.location.href = "/profile.html#proposal";
+            window.location.href = "profile.html#proposal";
           } else {
             showToast(data.message || "Failed to submit proposal", true);
           }

@@ -21,7 +21,37 @@ $input = json_decode(file_get_contents('php://input'), true);
 switch ($method) {
     case 'GET':
         // Check for specific proposal
-        if (isset($_GET['postId']) && isset($_GET['freelancerId'])) {
+        if (isset($_GET['proposalId']) && isset($_GET['action'])) {
+            $proposalId = $_GET['proposalId'];
+            $action = $_GET['action'];
+            
+            if ($action === 'approve') {
+                $stmt = $conn->prepare("UPDATE proposal SET isApproved = 1, isCancelled = 0 WHERE id = ?");
+            } else if ($action === 'reject') {
+                $stmt = $conn->prepare("UPDATE proposal SET isApproved = 0, isCancelled = 1 WHERE id = ?");
+            } else if ($action === 'cancel') {
+                $stmt = $conn->prepare("UPDATE proposal SET isCancelled = 1 WHERE id = ?");
+            } else {
+                http_response_code(400);
+                echo json_encode(["status" => "error", "message" => "Invalid action"]);
+                exit();
+            }
+            
+            $stmt->bind_param("s", $proposalId);
+            
+            if ($stmt->execute()) {
+                http_response_code(200);
+                echo json_encode(["status" => "success", "message" => "Proposal updated successfully"]);
+            } else {
+                http_response_code(500);
+                echo json_encode(["status" => "error", "message" => "Failed to update proposal"]);
+            }
+            
+            $stmt->close();
+            exit();
+        }
+    
+       else if (isset($_GET['postId']) && isset($_GET['freelancerId'])) {
             $postId = $_GET['postId'];
             $freelancerId = $_GET['freelancerId'];
             
@@ -51,22 +81,79 @@ switch ($method) {
         }
         
         // Get freelancer's proposals
-        else if (isset($_GET['freelancerId'])) {
-            $freelancerId = $_GET['freelancerId'];
-            $stmt = $conn->prepare("SELECT * FROM proposal WHERE freelancerId = ?");
-            $stmt->bind_param("s", $freelancerId);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            $proposals = $result->fetch_all(MYSQLI_ASSOC);
-            
-            http_response_code(200);
-            echo json_encode([
-                "status" => "success",
-                "data" => $proposals
-            ]);
-            $stmt->close();
-            exit();
+   // Get freelancer's proposals
+// Get freelancer's proposals
+// Get freelancer's proposals
+else if (isset($_GET['freelancerId'])) {
+    $freelancerId = $_GET['freelancerId'];
+
+    // Query to fetch proposals with customer details for approved proposals
+    $stmt = $conn->prepare("
+        SELECT 
+            proposal.id AS proposalId, 
+            proposal.freelancerId, 
+            proposal.postId, 
+            proposal.isApproved, 
+            proposal.isCancelled,
+            customer.id AS customerId, 
+            customer.firstName, 
+            customer.middleName, 
+            customer.lastName, 
+            customer.email, 
+            customer.phoneNumber 
+        FROM 
+            proposal 
+        LEFT JOIN 
+            post 
+        ON 
+            proposal.postId = post.id 
+        LEFT JOIN 
+            customer 
+        ON 
+            post.customerId = customer.id 
+        WHERE 
+            proposal.freelancerId = ?
+    ");
+
+    $stmt->bind_param("s", $freelancerId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $proposals = [];
+
+    while ($row = $result->fetch_assoc()) {
+        $customerDetails = null;
+
+        // Include customer details only if the proposal is approved and not cancelled
+        if ($row['isApproved'] && !$row['isCancelled']) {
+            $customerDetails = [
+                "id" => $row['customerId'],
+                "firstName" => $row['firstName'],
+                "middleName" => $row['middleName'],
+                "lastName" => $row['lastName'],
+                "email" => $row['email'],
+                "phoneNumber" => $row['phoneNumber'],
+            ];
         }
+
+        $proposals[] = [
+            "proposalId" => $row['proposalId'],
+            "freelancerId" => $row['freelancerId'],
+            "postId" => $row['postId'],
+            "isApproved" => (bool)$row['isApproved'], // Cast to boolean for clarity
+            "isCancelled" => (bool)$row['isCancelled'], // Cast to boolean for clarity
+            "customer" => $customerDetails,
+        ];
+    }
+
+    http_response_code(200);
+    echo json_encode([
+        "status" => "success",
+        "data" => $proposals
+    ]);
+
+    $stmt->close();
+    exit();
+}
         
         // Get post's proposals
         else if (isset($_GET['postId'])) {
@@ -97,39 +184,58 @@ switch ($method) {
             exit();
         }
 
-        // Check if proposal already exists
-        $stmt = $conn->prepare("SELECT id FROM proposal WHERE freelancerId = ? AND postId = ?");
-        $stmt->bind_param("ss", $input['freelancerId'], $input['postId']);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        
-        if ($result->num_rows > 0) {
-            http_response_code(400);
-            echo json_encode([
-                "status" => "error",
-                "message" => "Proposal already exists"
-            ]);
-            exit();
-        }
+  
 
-        // Insert new proposal
-        $stmt = $conn->prepare("INSERT INTO proposal (freelancerId, postId) VALUES (?, ?)");
-        $stmt->bind_param("ss", $input['freelancerId'], $input['postId']);
 
-        if ($stmt->execute()) {
-            http_response_code(201);
-            echo json_encode([
-                "status" => "success",
-                "message" => "Proposal added successfully"
-            ]);
-        } else {
-            http_response_code(500);
-            echo json_encode([
-                "status" => "error",
-                "message" => "Failed to add proposal"
-            ]);
-        }
-        $stmt->close();
+      // Check if a proposal already exists for the given postId and freelancerId
+$stmt = $conn->prepare("SELECT id FROM proposal WHERE postId = ? AND freelancerId = ?");
+$stmt->bind_param("ss", $input['postId'], $input['freelancerId']);
+$stmt->execute();
+$result = $stmt->get_result();
+
+// If the proposal already exists, return an error
+if ($result->num_rows > 0) {
+    http_response_code(400);
+    echo json_encode([
+        "status" => "error",
+        "message" => "Proposal already exists"
+    ]);
+    exit();
+}
+
+// Check if proposal already exists
+$stmt = $conn->prepare("SELECT id FROM proposal WHERE postId = ? AND freelancerId = ?");
+$stmt->bind_param("ss", $input['postId'], $input['freelancerId']);
+$stmt->execute();
+$result = $stmt->get_result();
+
+// If the proposal already exists, return an error
+if ($result->num_rows > 0) {
+    http_response_code(400);
+    echo json_encode([
+        "status" => "error",
+        "message" => "Proposal already exists"
+    ]);
+    exit();
+}
+
+// If proposal does not exist, insert a new one
+$stmt = $conn->prepare("INSERT INTO proposal (id, postId, freelancerId) VALUES (UUID(), ?, ?)");
+$stmt->bind_param("ss", $input['postId'], $input['freelancerId']);
+if ($stmt->execute()) {
+    http_response_code(201);
+    echo json_encode([
+        "status" => "success",
+        "message" => "Proposal added successfully"
+    ]);
+} else {
+    http_response_code(500);
+    echo json_encode([
+        "status" => "error",
+        "message" => "Failed to add proposal"
+    ]);
+}
+$stmt->close();
         break;
 
     default:

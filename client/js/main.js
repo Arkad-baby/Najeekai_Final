@@ -1,4 +1,4 @@
-console.log("hello")
+console.log("ProfileManager initialized");
 document.addEventListener('DOMContentLoaded', () => {
     fetch('http://localhost/NajeekaiAPI/api/customer.php')
       .then(response => response.json())

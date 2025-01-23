@@ -63,22 +63,113 @@ switch ($method) {
         
             $stmt->close();
         }
-
         else if (isset($_GET['customerId'])) {
             $customerId = $_GET['customerId'];
-            $postsOfCustomer = [];
-            // Use a more flexible search query with LIKE for partial matches
-            $stmt = $conn->prepare("SELECT * FROM post WHERE customerId = ?");
+            $posts = [];
+            
+            // Modified query to include only existing customer fields
+            $stmt = $conn->prepare("
+                SELECT 
+                    p.*,
+                    c.username as customer_username,
+                    c.firstName as customer_firstName,
+                    c.email as customer_email,
+                    c.middleName as customer_middleName,
+                    c.lastName as customer_lastName,
+                    c.address as customer_address,
+                    c.phoneNumber as customer_phoneNumber,
+                    pr.id as proposal_id,
+                    pr.isApproved,
+                    pr.isCancelled,
+                    f.id as freelancer_id,
+                    f.username as freelancer_username,
+                    f.firstName as freelancer_firstName,
+                    f.middleName as freelancer_middleName,
+                    f.lastName as freelancer_lastName,
+                    f.email as freelancer_email,
+                    f.phoneNumber as freelancer_phoneNumber,
+                    f.address as freelancer_address,
+                    f.skills as freelancer_skills
+                FROM post p
+                LEFT JOIN customer c ON p.customerId = c.id
+                LEFT JOIN proposal pr ON p.id = pr.postId
+                LEFT JOIN freelancer f ON pr.freelancerId = f.id
+                WHERE p.customerId = ?
+            ");
+            
             $stmt->bind_param("s", $customerId);
             $stmt->execute();
             $result = $stmt->get_result();
+            
+            $postsMap = [];
+            
             while ($row = $result->fetch_assoc()) {
-                $posts[] = $row;
+                $postId = $row['id'];
+                
+                // If this is the first time we're seeing this post
+                if (!isset($postsMap[$postId])) {
+                    // Extract post fields
+                    $post = [
+                        'id' => $row['id'],
+                        'caption' => $row['caption'],
+                        'description' => $row['description'],
+                        'postedAt' => $row['postedAt'],
+                        'requiredSkills' => $row['requiredSkills'],
+                        'location' => $row['location'],
+                        'estimatedTime' => $row['estimatedTime'],
+                        'customerId' => $row['customerId'],
+                        'rate' => $row['rate'],
+                        'username' => $row['customer_username'],
+                        'firstName' => $row['customer_firstName'],
+                        'email' => $row['customer_email'],
+                        'middleName' => $row['customer_middleName'],
+                        'lastName' => $row['customer_lastName'],
+                        'address' => $row['customer_address'],
+                        'phoneNumber' => $row['customer_phoneNumber'],
+                        'proposals' => []
+                    ];
+                    
+                    $postsMap[$postId] = $post;
+                }
+                
+                // If there's a proposal for this post
+                if ($row['proposal_id']) {
+                    // Create freelancer object only if freelancer_id exists
+                    $freelancer = null;
+                    if ($row['freelancer_id']) {
+                        $freelancer = [
+                            'id' => $row['freelancer_id'],
+                            'username' => $row['freelancer_username'],
+                            'firstName' => $row['freelancer_firstName'],
+                            'middleName' => $row['freelancer_middleName'],
+                            'lastName' => $row['freelancer_lastName'],
+                            'email' => $row['freelancer_email'],
+                            'phoneNumber' => $row['freelancer_phoneNumber'],
+                            'address' => $row['freelancer_address'],
+                            'skills' => $row['freelancer_skills']
+                        ];
+                    }
+                    
+                    $proposal = [
+                        'id' => $row['proposal_id'],
+                        'isApproved' => (bool)$row['isApproved'],
+                        'isCancelled' => (bool)$row['isCancelled'],
+                        'freelancer' => $freelancer
+                    ];
+                    
+                    $postsMap[$postId]['proposals'][] = $proposal;
+                }
             }
-        
+            
+            // Convert the map to an array
+            $posts = array_values($postsMap);
+            
             if (!empty($posts)) {
                 http_response_code(200);
-                echo json_encode(["status" => "success", "data" => $posts]);
+                echo json_encode([
+                    "status" => "success",
+                    "data" => $posts
+                ]);
             } else {
                 http_response_code(404); // Not Found
                 echo json_encode([
@@ -86,7 +177,7 @@ switch ($method) {
                     "message" => "No posts found for the given customer"
                 ]);
             }
-        
+            
             $stmt->close();
         }
         

@@ -1,5 +1,3 @@
-// profile.js
-console.log("ProfileManager initialized");
 class ProfileManager {
   constructor() {
     this.profileForm = document.getElementById("profileForm");
@@ -16,6 +14,7 @@ class ProfileManager {
     try {
       await this.loadUserProfile();
       this.setupEventListeners();
+      this.setupTabSwitching();
     } catch (error) {
       console.error("Failed to initialize profile:", error);
       this.showAlert("Failed to load profile data", "error");
@@ -24,10 +23,12 @@ class ProfileManager {
 
   async loadUserProfile() {
     const userData = JSON.parse(localStorage.getItem("userData"));
+    if (!userData) throw new Error("User data not found in local storage.");
+
     let apiUrl = "";
     if (userData.userType === "customer") {
       apiUrl = `http://localhost/Najeekai/api/customer.php?id=${userData.id}`;
-    } else if (userType === "freelancer") {
+    } else if (userData.userType === "freelancer") {
       apiUrl = `http://localhost/Najeekai/api/freelancer.php?id=${userData.id}`;
     }
 
@@ -35,8 +36,7 @@ class ProfileManager {
       const response = await AuthHandler.makeAuthenticatedRequest(apiUrl, {
         method: "GET",
         headers: {
-          // 'Content-Type': 'application/json',
-          // authorization: `Bearer ${localStorage.getItem("authToken")}`,
+          "Content-Type": "application/json",
         },
       });
 
@@ -57,7 +57,6 @@ class ProfileManager {
   populateProfileData() {
     if (!this.userData) return;
 
-    // Update form fields
     const fields = [
       "firstName",
       "lastName",
@@ -70,7 +69,6 @@ class ProfileManager {
       const input = this.profileForm.querySelector(`[name="${field}"]`);
       if (input) {
         input.value = this.userData[field] || "";
-        // Make username and email readonly as they shouldn't be changed
         if (field === "username" || field === "email") {
           input.readOnly = true;
           input.classList.add("bg-gray-100");
@@ -82,7 +80,6 @@ class ProfileManager {
   updateHeaderInfo() {
     if (!this.userData) return;
 
-    // Update profile header information
     const nameElement = document.querySelector(".text-white .text-3xl");
     const usernameElement = document.querySelector(".text-white .text-lg");
 
@@ -97,233 +94,93 @@ class ProfileManager {
   setupEventListeners() {
     this.profileForm.addEventListener("submit", async (e) => {
       e.preventDefault();
-      await this.handleProfileUpdate(e);
+      await this.handleProfileUpdate();
     });
 
-    // Handle logout
     const logoutButton = document.querySelector(
       "button i.fa-sign-out-alt"
-    ).parentElement;
+    )?.parentElement;
+
     if (logoutButton) {
       logoutButton.addEventListener("click", () => {
         AuthHandler.clearAuth();
-      });
-    }
-    const proposalTab = document.querySelector('[data-tab="proposals"]');
-    if (proposalTab) {
-      proposalTab.addEventListener("click", async () => {
-        this.showTab("proposals");
-        await this.loadProposals();
+        window.location.href = "login.html";
       });
     }
 
-    // Check for #proposal hash on load
-    if (window.location.hash === "#proposals") {
-      const proposalTab = document.querySelector('[data-tab="proposals"]');
-      if (proposalTab) {
-        proposalTab.click();
-      }
+    const newPostBtn = document.getElementById("newPostBtn");
+    const postForm = document.getElementById("postForm");
+    const cancelPostBtn = document.getElementById("cancelPost");
+
+    if (newPostBtn && postForm && cancelPostBtn) {
+      newPostBtn.addEventListener("click", () => {
+        postForm.classList.remove("hidden");
+      });
+
+      cancelPostBtn.addEventListener("click", () => {
+        postForm.classList.add("hidden");
+      });
     }
   }
 
-  showTab(tabId) {
-    // Hide all tab contents
-    document.querySelectorAll(".tab-content").forEach((content) => {
-      content.classList.add("hidden");
-    });
+  setupTabSwitching() {
+    const tabButtons = document.querySelectorAll(".tab-btn");
+    const tabContents = document.querySelectorAll(".tab-content");
 
-    // Show selected tab content
-    const selectedTab = document.getElementById(tabId);
-    if (selectedTab) {
-      selectedTab.classList.remove("hidden");
-    }
-
-    // Update tab button styles
-    document.querySelectorAll(".tab-btn").forEach((btn) => {
-      if (btn.getAttribute("data-tab") === tabId) {
-        btn.classList.add("text-blue-600", "border-b-2", "border-blue-600");
-        btn.classList.remove("text-gray-500");
-      } else {
-        btn.classList.remove("text-blue-600", "border-b-2", "border-blue-600");
-        btn.classList.add("text-gray-500");
-      }
-    });
-  }
-
-  async loadProposals() {
-    if (!this.proposalsContent || !this.proposalsLoading) {
-      console.error("Proposals elements not found");
-      return;
-    }
-
-    // Show loading state
-    this.proposalsLoading.classList.remove("hidden");
-    this.proposalsContent.innerHTML = "";
-
-    const userData = JSON.parse(localStorage.getItem("userData"));
-    if (!userData) {
-      this.proposalsContent.innerHTML =
-        '<p class="text-center text-gray-500 py-8">Please login to view proposals</p>';
-      this.proposalsLoading.classList.add("hidden");
-      return;
-    }
-
-    try {
-      let endpoint;
-      if (userData.userType === "freelancer") {
-        endpoint = `http://localhost/Najeekai/api/proposal.php?freelancerId=${userData.id}`;
-      } else {
-        endpoint = `http://localhost/Najeekai/api/proposal.php?postId=${userData.id}`;
-      }
-
-      const response = await fetch(endpoint);
-      const result = await response.json();
-
-      this.proposalsLoading.classList.add("hidden");
-
-      if (
-        result.status === "success" &&
-        Array.isArray(result.data) &&
-        result.data.length > 0
-      ) {
-        console.log("result:", result); // Debug log
-        console.log("data:", result.data); // Debug log
-        await this.renderProposals(result.data, userData.userType);
-      } else {
-        this.showNoProposals(userData.userType);
-      }
-    } catch (error) {
-      console.error("Error loading proposals:", error);
-      this.showProposalsError();
-    }
-  }
-
-  async renderProposals(proposals, userType) {
-    // First, fetch all associated post details
-    const proposalsWithDetails = await Promise.all(
-      proposals.map(async (proposal) => {
-        try {
-          const postResponse = await fetch(
-            `http://localhost/Najeekai/api/post.php?id=${proposal.postId}`
+    tabButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        // Remove active classes from all buttons
+        tabButtons.forEach((btn) => {
+          btn.classList.remove(
+            "text-blue-600",
+            "border-b-2",
+            "border-blue-600"
           );
-          const postData = await postResponse.json();
-          return {
-            ...proposal,
-            post: postData.status === "success" ? postData.data : null,
-          };
-        } catch (error) {
-          console.error("Error fetching post details:", error);
-          return proposal;
-        }
-      })
-    );
+          btn.classList.add("text-gray-500");
+        });
 
-    const proposalCards = proposalsWithDetails
-      .map(
-        (proposal) => `
-      <div class="bg-white rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-all">
-        <div class="p-6">
-          <div class="flex justify-between items-start">
-            <div>
-              <h3 class="text-lg font-semibold text-gray-900">
-                ${
-                  proposal.post
-                    ? proposal.post.caption
-                    : "Post details unavailable"
-                }
-              </h3>
-              <p class="text-sm text-gray-600 mt-1">
-                ${proposal.post ? proposal.post.description : ""}
-              </p>
-            </div>
-            <span class="px-3 py-1 rounded-full text-sm font-medium ${
-              proposal.isApproved
-                ? "bg-green-100 text-green-800"
-                : "bg-yellow-100 text-yellow-800"
-            }">
-              ${proposal.isApproved ? "Approved" : "Pending"}
-            </span>
-          </div>
+        // Add active classes to clicked button
+        button.classList.add("text-blue-600", "border-b-2", "border-blue-600");
+        button.classList.remove("text-gray-500");
 
-          ${
-            proposal.post
-              ? `
-            <div class="mt-4 grid grid-cols-3 gap-4 text-sm">
-              <div>
-                <p class="text-gray-600">Location</p>
-                <p class="font-medium">${proposal.post.location}</p>
-              </div>
-              <div>
-                <p class="text-gray-600">Rate</p>
-                <p class="font-medium">$${proposal.post.rate}/hr</p>
-              </div>
-              <div>
-                <p class="text-gray-600">Est. Time</p>
-                <p class="font-medium">${proposal.post.estimatedTime} hours</p>
-              </div>
-            </div>
-          `
-              : ""
+        // Hide all tab contents
+        tabContents.forEach((content) => {
+          content.classList.add("hidden");
+        });
+
+        // Show selected tab content
+        const tabId = button.getAttribute("data-tab");
+
+        const TabContent = document.getElementById(tabId);
+        if (TabContent) {
+          TabContent.classList.remove("hidden");
+          if (tabId === "proposal") {
+            loadProposals();
           }
-          
-          ${
-            !proposal.isApproved && userType === "customer"
-              ? `
-            <div class="mt-6 flex justify-end space-x-3">
-              <button 
-                onclick="handleProposal('${proposal.id}', 'reject')"
-                class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
-              >
-                Reject
-              </button>
-              <button 
-                onclick="handleProposal('${proposal.id}', 'approve')"
-                class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-              >
-                Approve
-              </button>
-            </div>
-          `
-              : ""
-          }
-        </div>
-      </div>
-    `
-      )
-      .join("");
-    this.proposalsContent.innerHTML = proposalCards;
-  }
-
-  showNoProposals(userType) {
-    this.proposalsContent.innerHTML = `
-      <p class="text-center text-gray-500 py-8">
-        ${
-          userType === "freelancer"
-            ? "You haven't submitted any proposals yet."
-            : "No proposals have been submitted for your posts yet."
         }
-      </p>`;
+      });
+    });
+
+    if (this.userType === "freelancer") {
+      const postTab = document.getElementById("postTab");
+      if (postTab) postTab.classList.add("hidden");
+    }
   }
 
-  showProposalsError() {
-    this.proposalsContent.innerHTML = `
-      <p class="text-center text-red-500 py-8">
-        Something went wrong while loading proposals. Please try again later.
-      </p>`;
-    this.proposalsLoading.classList.add("hidden");
-  }
-
-  async handleProfileUpdate(event) {
+  async handleProfileUpdate() {
     const formData = new FormData(this.profileForm);
     const updatedData = {};
+
     formData.forEach((value, key) => {
       updatedData[key] = value;
     });
 
-    try {
-      const userData = JSON.parse(localStorage.getItem("userData"));
-      const apiUrl = `http://localhost/Najeekai/api/updateProfile.php?id=${userData.id}`;
+    const apiUrl =
+      this.userType === "customer"
+        ? `http://localhost/Najeekai/api/customer.php`
+        : `http://localhost/Najeekai/api/freelancer.php`;
 
+    try {
       const response = await AuthHandler.makeAuthenticatedRequest(apiUrl, {
         method: "POST",
         body: JSON.stringify(updatedData),
@@ -332,49 +189,309 @@ class ProfileManager {
         },
       });
 
-      if (response.ok) {
-        const result = await response.json();
-        if (result.status === "success") {
-          this.showAlert("Profile updated successfully", "success");
-          this.userData = { ...this.userData, ...updatedData };
-          this.updateHeaderInfo();
-        } else {
-          throw new Error(result.message || "Update failed");
-        }
+      const result = await response.json();
+
+      if (response.ok && result.status === "success") {
+        this.showAlert("Profile updated successfully", "success");
+        await this.loadUserProfile();
       } else {
-        throw new Error("Failed to update profile");
+        throw new Error(result.message || "Failed to update profile");
       }
     } catch (error) {
       console.error("Error updating profile:", error);
       this.showAlert("Failed to update profile", "error");
     }
   }
-
-  showAlert(message, type) {
-    if (this.submitAlert) {
-      this.submitAlert.textContent = message;
-      this.submitAlert.className = `alert alert-${type}`;
-      this.submitAlert.classList.remove("hidden");
-
-      setTimeout(() => {
-        this.submitAlert.classList.add("hidden");
-      }, 3000);
-    }
-  }
 }
 
-// Initialize ProfileManager on page load
+// Initialize the ProfileManager when the DOM is fully loaded
 document.addEventListener("DOMContentLoaded", () => {
   new ProfileManager();
 });
 
+async function loadProposals() {
+  const userData = JSON.parse(localStorage.getItem("userData"));
+  const proposalsContent = document.getElementById("proposalsContent");
+  const loadingElement = document.getElementById("proposalsLoading");
+
+  if (!proposalsContent) {
+    console.error("proposalsContent element not found");
+    return;
+  }
+
+  loadingElement.classList.remove("hidden");
+  proposalsContent.innerHTML = "";
+
+  if (!userData) {
+    proposalsContent.innerHTML = `
+      <p class="text-center text-gray-500 py-8">Please login to view proposals</p>`;
+    loadingElement.classList.add("hidden");
+    return;
+  }
+
+  try {
+    const endpoint =
+      userData.userType === "freelancer"
+        ? `http://localhost/Najeekai/api/proposal.php?freelancerId=${userData.id}`
+        : `http://localhost/Najeekai/api/post.php?customerId=${userData.id}`;
+
+    const response = await fetch(endpoint);
+    if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
+    const result = await response.json();
+
+    loadingElement.classList.add("hidden");
+
+    if (!result.data || result.data.length === 0) {
+      proposalsContent.innerHTML = `
+        <p class="text-center text-gray-500 py-8">No proposals found</p>`;
+      return;
+    }
+
+    // Render proposals/posts
+    const proposalCards = await Promise.all(
+      result.data.map((item) => generateProposalCard(item, userData.userType))
+    );
+    console.log("propoasl", proposalCards);
+    proposalsContent.innerHTML = proposalCards.join("");
+  } catch (error) {
+    console.error("Error loading proposal:", error);
+    proposalsContent.innerHTML = `
+      <p class="text-red-500 text-center py-8">Failed to load proposals. Please try again later.</p>`;
+    loadingElement.classList.add("hidden");
+  }
+}
+
+// Helper to fetch post or freelancer data
+async function fetchAdditionalData(type, id) {
+  const url =
+    type === "post"
+      ? `http://localhost/Najeekai/api/post.php?id=${id}`
+      : `http://localhost/Najeekai/api/proposal.php?freelancerId=${id}`;
+  try {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
+    const result = await response.json();
+    return result.data;
+  } catch (error) {
+    console.error(`Error fetching ${type} data:`, error);
+    return null;
+  }
+}
+
+async function generateProposalCard(item, userType) {
+  let post, proposal;
+
+  if (userType === "freelancer") {
+    proposal = item;
+    post = await fetchAdditionalData("post", proposal?.postId);
+  } else {
+    post = item; // Show the first proposal
+  }
+
+  // Ensure proposal and post are defined before trying to use them
+  if (!post) {
+    return `<div class="text-center text-red-500 py-8">Post data is missing.</div>`;
+  }
+
+  const showCustomerInfo = proposal?.isApproved && userType === "freelancer";
+  const showFreelancerInfo = userType === "customer";
+
+  return `
+    <div class="bg-white rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-all p-6 space-y-4">
+      <div class="flex justify-between items-start">
+        <div class="space-y-3 flex-1">
+          <div>
+            <h3 class="text-xl font-semibold text-gray-900">${
+              post?.caption || "N/A"
+            }</h3>
+            <p class="text-gray-600 mt-1">${
+              post?.description || "No description available"
+            }</p>
+          </div>
+          <div class="grid grid-cols-2 gap-4 text-sm">
+            <div class="flex items-center text-gray-600">
+              <span>Posted: ${formatDate(post?.postedAt)}</span>
+            </div>
+            <div class="flex items-center text-gray-600">
+              <span>${post?.location || "Unknown Location"}</span>
+            </div>
+            <div class="flex items-center text-gray-600">
+              <span>Rate: $${post?.rate || "N/A"}/hr</span>
+            </div>
+            <div class="flex items-center text-gray-600">
+              <span>Est. Time: ${post?.estimatedTime || "N/A"} hours</span>
+            </div>
+          </div>
+        </div>
+        <span class="px-4 py-2 rounded-full text-sm font-medium ${
+          proposal?.isApproved
+            ? "bg-green-100 text-green-800 border border-green-200"
+            : proposal?.isCancelled
+            ? "bg-red-100 text-red-800 border border-red-200"
+            : "bg-yellow-100 text-yellow-800 border border-yellow-200"
+        }">
+          ${
+            proposal?.isApproved
+              ? "Approved"
+              : proposal?.isCancelled
+              ? "Rejected"
+              : "Pending"
+          }
+        </span>
+      </div>
+
+      ${
+        showFreelancerInfo &&
+        item.proposals?.map((item) => {
+          console.log(item);
+          return generateFreelancerDetails(
+            item.freelancer,
+            userType,
+            proposal?.isApproved,
+            item.id
+          );
+        })
+      }
+
+      ${
+        showCustomerInfo
+          ? `
+          <div class="mt-6 bg-gray-50 rounded-lg border border-gray-200 p-4">
+            <h4 class="text-lg font-medium text-gray-900 mb-3">Customer Details</h4>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <p class="text-sm text-gray-500">Name</p>
+                <p class="text-sm font-medium">${
+                  proposal?.customer.firstName
+                } ${proposal?.customer.middleName || ""} ${
+              proposal?.customer.lastName
+            }</p>
+              </div>
+              <div>
+                <p class="text-sm text-gray-500">Email</p>
+                <p class="text-sm font-medium">${proposal?.customer.email}</p>
+              </div>
+              <div>
+                <p class="text-sm text-gray-500">Phone</p>
+                <p class="text-sm font-medium">${
+                  proposal?.customer.phoneNumber
+                }</p>
+              </div>
+            </div>
+          </div>`
+          : ""
+      }
+    </div>`;
+}
+
+// Function to handle approve button click
+async function approveProposal(proposalId) {
+  try {
+    const response = await fetch(
+      `http://localhost/Najeekai/api/proposal.php?action=approve&id=${proposalId}`,
+      {
+        method: "POST",
+      }
+    );
+    if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
+
+    const result = await response.json();
+    if (result.success) {
+      alert("Proposal approved successfully!");
+      loadProposals(); // Reload proposals after approval
+    } else {
+      alert("Failed to approve proposal. Please try again.");
+    }
+  } catch (error) {
+    console.error("Error approving proposal:", error);
+    alert("An error occurred. Please try again.");
+  }
+}
+
+// Function to handle reject button click
+async function rejectProposal(proposalId) {
+  try {
+    const response = await fetch(
+      `http://localhost/Najeekai/api/proposal.php?action=reject&id=${proposalId}`,
+      {
+        method: "POST",
+      }
+    );
+    if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
+
+    const result = await response.json();
+    if (result.success) {
+      alert("Proposal rejected successfully!");
+      loadProposals(); // Reload proposals after rejection
+    } else {
+      alert("Failed to reject proposal. Please try again.");
+    }
+  } catch (error) {
+    console.error("Error rejecting proposal:", error);
+    alert("An error occurred. Please try again.");
+  }
+}
+
+// Generate HTML for freelancer details
+function generateFreelancerDetails(
+  freelancer,
+  userType,
+  isApproved,
+  proposalId
+) {
+  return `
+    <div class="mt-6 bg-gray-50 rounded-lg border border-gray-200 p-4">
+      <h4 class="text-lg font-medium text-gray-900 mb-3">Freelancer Details</h4>
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <p class="text-sm text-gray-500">Name</p>
+          <p class="text-sm font-medium">${freelancer.firstName} ${
+    freelancer.middleName || ""
+  } ${freelancer.lastName}</p>
+        </div>
+        <div>
+          <p class="text-sm text-gray-500">Username</p>
+          <p class="text-sm font-medium">${freelancer.username}</p>
+        </div>
+        <div>
+          <p class="text-sm text-gray-500">Email</p>
+          <p class="text-sm font-medium">${freelancer.email}</p>
+        </div>
+        <div>
+          <p class="text-sm text-gray-500">Phone</p>
+          <p class="text-sm font-medium">${freelancer.phoneNumber}</p>
+        </div>
+      </div>
+            ${
+              !isApproved && userType === "customer"
+                ? ` <div class="mt-4 flex justify-end gap-4"> 
+        <button class="bg-green-500 text-white py-2 px-4 rounded" onclick="approveProposal(${proposalId})">Approve</button>
+        <button class="bg-red-500 text-white py-2 px-4 rounded" onclick="rejectProposal(${proposalId})">Reject</button>
+      </div> `
+                : ""
+            }
+    </div>`;
+}
+
+// Helper to format date
+function formatDate(dateString) {
+  if (!dateString) return "Unknown Date";
+  return new Date(dateString).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
+
 // Search functionality
 document.addEventListener("DOMContentLoaded", function () {
   const searchInput = document.getElementById("searchInput");
+  console.log("Search input:", searchInput);
   const searchResults = document.getElementById("searchDropdown");
   let debounceTimer;
 
-  // Get user type from localStorage
   function getUserType() {
     try {
       const userData = localStorage.getItem("userData");
@@ -471,7 +588,6 @@ document.addEventListener("DOMContentLoaded", function () {
     searchResults.classList.remove("hidden");
   }
 
-  // Handle search
   async function handleSearch() {
     const searchTerm = searchInput.value.trim();
     const userType = getUserType();
@@ -538,58 +654,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Initial placeholder update
   updatePlaceholder();
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-  const userType = JSON.parse(localStorage.getItem("userData")).userType;
-  if (userType === "freelancer") {
-    const postTab = document.getElementById("postTab");
-    postTab.classList.add("hidden");
-  }
-
-  const tabButtons = document.querySelectorAll(".tab-btn");
-  const tabContents = document.querySelectorAll(".tab-content");
-
-  // Function to switch tabs
-  function switchTab(tabId) {
-    // Remove active classes from all buttons
-    tabButtons.forEach((btn) => {
-      btn.classList.remove("text-blue-600", "border-b-2", "border-blue-600");
-      btn.classList.add("text-gray-500");
-    });
-
-    // Add active classes to the selected button
-    const activeButton = document.querySelector(`[data-tab="${tabId}"]`);
-    if (activeButton) {
-      activeButton.classList.add(
-        "text-blue-600",
-        "border-b-2",
-        "border-blue-600"
-      );
-      activeButton.classList.remove("text-gray-500");
-    }
-
-    // Hide all tab contents
-    tabContents.forEach((content) => {
-      content.classList.add("hidden");
-    });
-
-    // Show selected tab content
-    const selectedTab = document.getElementById(tabId);
-    if (selectedTab) {
-      selectedTab.classList.remove("hidden");
-    }
-  }
-
-  // Handle click events on tab buttons
-  tabButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const tabId = button.getAttribute("data-tab");
-      // Update URL hash without triggering scroll
-      history.pushState(null, null, `#${tabId}`);
-      switchTab(tabId);
-    });
-  });
 
   // Handle URL hash changes
   function handleHashChange() {
@@ -603,95 +667,3 @@ document.addEventListener("DOMContentLoaded", function () {
   // Handle initial page load
   handleHashChange();
 });
-
-document.addEventListener("DOMContentLoaded", function () {
-  // Function to get initials from name
-  function getInitials(firstName = "", lastName = "") {
-    const firstInitial = firstName ? firstName.charAt(0).toUpperCase() : "";
-    const lastInitial = lastName ? lastName.charAt(0).toUpperCase() : "";
-    return `${firstInitial}${lastInitial}`;
-  }
-
-  // Function to generate a consistent color based on name
-  function generateColorFromName(name) {
-    const colors = [
-      "bg-blue-500",
-      "bg-purple-500",
-      "bg-green-500",
-      "bg-red-500",
-      "bg-indigo-500",
-      "bg-pink-500",
-    ];
-
-    // Simple hash function to get consistent color
-    let hash = 0;
-    for (let i = 0; i < name.length; i++) {
-      hash = name.charCodeAt(i) + ((hash << 5) - hash);
-    }
-
-    return colors[Math.abs(hash) % colors.length];
-  }
-
-  try {
-    // Get user data from localStorage
-    const userData = JSON.parse(localStorage.getItem("userData")) || {};
-    const { firstName = "", lastName = "" } = userData;
-    const initials = getInitials(firstName, lastName);
-    const colorClass = generateColorFromName(firstName + lastName);
-
-    // Get the avatar container
-    const avatarContainer = document.querySelector(".relative.group");
-    if (avatarContainer) {
-      // Replace the content with initials avatar
-      avatarContainer.innerHTML = `
-        <div class="w-32 h-32 rounded-full border-4 border-white overflow-hidden ${colorClass} flex items-center justify-center">
-          <span class="text-white text-4xl font-bold">${initials}</span>
-        </div>
-      `;
-
-      // Update profile name as well
-      const nameElement = document.querySelector(".text-3xl.font-bold");
-      const usernameElement = document.querySelector(".text-lg.opacity-90");
-      if (nameElement && firstName && lastName) {
-        nameElement.textContent = `${firstName} ${lastName}`;
-      }
-      if (usernameElement && userData.username) {
-        usernameElement.textContent = `@${userData.username}`;
-      }
-    }
-  } catch (error) {
-    console.error("Error setting up profile avatar:", error);
-  }
-});
-
-// Add this outside the class for global access
-async function handleProposal(proposalId, action) {
-  try {
-    const response = await fetch("http://localhost/Najeekai/api/proposal.php", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        proposalId,
-        action,
-        isApproved: action === "approve" ? 1 : 0,
-      }),
-    });
-
-    const data = await response.json();
-    if (data.status === "success") {
-      // Reload proposals using the ProfileManager instance
-      const profileManager =
-        document.querySelector("#proposalsContent")?.__profileManager;
-      if (profileManager) {
-        await profileManager.loadProposals();
-      }
-    } else {
-      alert(`Failed to ${action} proposal`);
-    }
-  } catch (error) {
-    console.error("Error handling proposal:", error);
-    alert("Error updating proposal status");
-  }
-}
