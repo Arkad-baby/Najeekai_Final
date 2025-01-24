@@ -56,6 +56,7 @@ class ProposalManager {
   }
 
   renderProposals(proposals) {
+    console.log(proposals);
       if (!proposals?.length) {
           this.renderEmpty();
           return;

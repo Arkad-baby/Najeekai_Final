@@ -186,6 +186,7 @@ else if (isset($_GET['customerId'])) {
     
     $stmt = $conn->prepare("
         SELECT 
+        proposal.id AS proposalId,
             proposal.*,
             freelancer.id AS freelancerId,
             freelancer.firstName AS freelancerFirstName,
@@ -206,7 +207,8 @@ else if (isset($_GET['customerId'])) {
     
     while ($row = $result->fetch_assoc()) {
         $proposals[] = [
-            "id" => $row['id'],
+            "id" => $row['proposalId'], 
+            "postId" => $row['postId'],  
             "isApproved" => (bool)$row['isApproved'],
             "isCancelled" => (bool)$row['isCancelled'],
             "freelancer" => [
@@ -224,7 +226,6 @@ else if (isset($_GET['customerId'])) {
                 "rate" => $row['rate'],
                 "estimatedTime" => $row['estimatedTime'],
                 "requiredSkills" => $row['requiredSkills'],
-             
             ]
         ];
     }
