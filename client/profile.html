@@ -257,31 +257,36 @@
           <!-- Add this inside your tab-content div after other tabs -->
           <div id="proposal" class="tab-content hidden">
             <div class="p-6">
-              <div class="mb-6 flex justify-between items-center">
-                <h2 class="text-2xl font-semibold text-gray-900">
-                  My Proposals
-                </h2>
+              <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-semibold text-gray-900">My Proposals</h2>
+                <div class="flex gap-4">
+                  <select id="proposalStatus" class="border rounded-lg px-4 py-2">
+                    <option value="all">All Status</option>
+                    <option value="pending">Pending</option>
+                    <option value="approved">Approved</option>
+                    <option value="rejected">Rejected</option>
+                  </select>
+                  <select id="proposalSort" class="border rounded-lg px-4 py-2">
+                    <option value="latest">Latest First</option>
+                    <option value="oldest">Oldest First</option>
+                    <option value="budget">Budget: High to Low</option>
+                  </select>
+                </div>
               </div>
-
+          
+              <!-- Alert Container -->
+              <div id="proposalAlert" class="hidden mb-4 p-4 rounded-md"></div>
+          
               <!-- Loading spinner -->
               <div id="proposalsLoading" class="hidden">
                 <div class="flex justify-center py-12">
-                  <div
-                    class="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600"
-                  ></div>
+                  <div class="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600"></div>
                 </div>
               </div>
-
+          
               <!-- Proposals content -->
               <div id="proposalsContent" class="space-y-4">
                 <!-- Proposals will be loaded here -->
-                <div class="carousel-container">
-                  <div class="carousel-wrapper">
-                    <!-- Proposal Cards will go here -->
-                  </div>
-                  <button class="prev-button">&#10094;</button>
-                  <button class="next-button">&#10095;</button>
-                </div>
               </div>
             </div>
           </div>
@@ -486,6 +491,9 @@
     <script src="./js/auth.js"></script>
     <script src="./js/posts.js"></script>
     <script src="./js/profile.js"></script>
+    <script src="./js/proposal.js"></script>
+    <script src="./js/search.js"></script>
+
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
   </body>
 </html>

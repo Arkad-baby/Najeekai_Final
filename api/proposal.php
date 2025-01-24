@@ -80,40 +80,39 @@ switch ($method) {
             exit();
         }
         
-        // Get freelancer's proposals
-   // Get freelancer's proposals
-// Get freelancer's proposals
-// Get freelancer's proposals
+  
 else if (isset($_GET['freelancerId'])) {
     $freelancerId = $_GET['freelancerId'];
 
     // Query to fetch proposals with customer details for approved proposals
     $stmt = $conn->prepare("
-        SELECT 
-            proposal.id AS proposalId, 
-            proposal.freelancerId, 
-            proposal.postId, 
-            proposal.isApproved, 
-            proposal.isCancelled,
-            customer.id AS customerId, 
-            customer.firstName, 
-            customer.middleName, 
-            customer.lastName, 
-            customer.email, 
-            customer.phoneNumber 
-        FROM 
-            proposal 
-        LEFT JOIN 
-            post 
-        ON 
-            proposal.postId = post.id 
-        LEFT JOIN 
-            customer 
-        ON 
-            post.customerId = customer.id 
-        WHERE 
-            proposal.freelancerId = ?
-    ");
+    SELECT
+        proposal.id AS proposalId,
+        proposal.freelancerId,
+        proposal.postId,
+        proposal.isApproved,
+        proposal.isCancelled,
+        customer.id AS customerId,
+        customer.firstName,
+        customer.middleName,
+        customer.lastName,
+        customer.email,
+        customer.phoneNumber,
+        post.caption AS postTitle,
+        post.description AS postDescription,
+        post.requiredSkills,
+        post.location,
+        post.estimatedTime AS estimatedTime,
+        post.rate
+    FROM
+        proposal
+    LEFT JOIN
+        post ON proposal.postId = post.id
+    LEFT JOIN
+        customer ON post.customerId = customer.id
+    WHERE
+        proposal.freelancerId = ?
+");
 
     $stmt->bind_param("s", $freelancerId);
     $stmt->execute();
@@ -122,8 +121,6 @@ else if (isset($_GET['freelancerId'])) {
 
     while ($row = $result->fetch_assoc()) {
         $customerDetails = null;
-
-        // Include customer details only if the proposal is approved and not cancelled
         if ($row['isApproved'] && !$row['isCancelled']) {
             $customerDetails = [
                 "id" => $row['customerId'],
@@ -134,14 +131,25 @@ else if (isset($_GET['freelancerId'])) {
                 "phoneNumber" => $row['phoneNumber'],
             ];
         }
-
+        
+        $postDetails = [
+            "id" => $row['postId'],
+            "caption" => $row['postTitle'],
+            "description" => $row['postDescription'],
+            "rate" => $row['rate'],
+            "requiredSkills" => $row['requiredSkills'],
+            "location" => $row['location'],
+            "estimatedTime" => $row['estimatedTime']
+        ];
+    
         $proposals[] = [
             "proposalId" => $row['proposalId'],
             "freelancerId" => $row['freelancerId'],
             "postId" => $row['postId'],
-            "isApproved" => (bool)$row['isApproved'], // Cast to boolean for clarity
-            "isCancelled" => (bool)$row['isCancelled'], // Cast to boolean for clarity
+            "isApproved" => (bool)$row['isApproved'],
+            "isCancelled" => (bool)$row['isCancelled'],
             "customer" => $customerDetails,
+            "post" => $postDetails
         ];
     }
 
