@@ -180,7 +180,66 @@ else if (isset($_GET['freelancerId'])) {
             $stmt->close();
             exit();
         }
+        // Inside the GET case, add this else if block
+else if (isset($_GET['customerId'])) {
+    $customerId = $_GET['customerId'];
+    
+    $stmt = $conn->prepare("
+        SELECT 
+            proposal.*,
+            freelancer.id AS freelancerId,
+            freelancer.firstName AS freelancerFirstName,
+            freelancer.lastName AS freelancerLastName,
+            freelancer.email AS freelancerEmail,
+            freelancer.phoneNumber AS freelancerPhone,
+            post.*
+        FROM proposal
+        JOIN post ON proposal.postId = post.id
+        JOIN freelancer ON proposal.freelancerId = freelancer.id
+        WHERE post.customerId = ?
+    ");
+    
+    $stmt->bind_param("s", $customerId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $proposals = [];
+    
+    while ($row = $result->fetch_assoc()) {
+        $proposals[] = [
+            "id" => $row['id'],
+            "isApproved" => (bool)$row['isApproved'],
+            "isCancelled" => (bool)$row['isCancelled'],
+            "freelancer" => [
+                "id" => $row['freelancerId'],
+                "firstName" => $row['freelancerFirstName'],
+                "lastName" => $row['freelancerLastName'],
+                "email" => $row['freelancerEmail'],
+                "phoneNumber" => $row['freelancerPhone']
+            ],
+            "post" => [
+                "id" => $row['postId'],
+                "caption" => $row['caption'],
+                "description" => $row['description'],
+                "location" => $row['location'],
+                "rate" => $row['rate'],
+                "estimatedTime" => $row['estimatedTime'],
+                "requiredSkills" => $row['requiredSkills'],
+                "postedAt" => $row['createdAt']
+            ]
+        ];
+    }
+    
+    http_response_code(200);
+    echo json_encode([
+        "status" => "success",
+        "data" => $proposals
+    ]);
+    
+    $stmt->close();
+    exit();
+}
         break;
+
 
     case 'POST':
         if (!$input['freelancerId'] || !$input['postId']) {

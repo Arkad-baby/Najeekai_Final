@@ -16,10 +16,128 @@ class ProposalManager {
       this.loadProposals();
     }
    
-    // setupListeners() {
-    //   this.elements.status?.addEventListener('change', () => this.loadProposals());
-    //   this.elements.sort?.addEventListener('change', () => this.loadProposals());
-    // }
+    setupListeners() {
+      this.elements.container.addEventListener('click', (e) => {
+          const btn = e.target.closest('.action-btn');
+          if (btn) {
+              const action = btn.dataset.action;
+              const id = btn.dataset.id;
+              if (action && id) {
+                  this.handleAction(id, action);
+              }
+          }
+      });
+  }
+
+  async loadProposals() {
+      if (!this.elements.container) return;
+      
+      this.showLoading(true);
+      
+      try {
+          const endpoint = `http://localhost/Najeekai/api/proposal.php?customerId=${this.userData.id}`;
+          const response = await fetch(endpoint);
+          const result = await response.json();
+          
+          if (result.status === "success") {
+              this.renderProposals(result.data);
+          } else {
+              throw new Error(result.message);
+          }
+      } catch (error) {
+          console.error('Error loading proposals:', error);
+          this.renderError();
+      } finally {
+          this.showLoading(false);
+      }
+  }
+
+  renderProposals(proposals) {
+      if (!proposals.length) {
+          this.renderEmpty();
+          return;
+      }
+
+      this.elements.container.innerHTML = proposals.map(proposal => this.generateProposalCard(proposal)).join('');
+  }
+
+  generateProposalCard(proposal) {
+      return `
+          <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-6">
+              <div class="p-6 border-b border-gray-200">
+                  <div class="flex justify-between items-start">
+                      <div class="flex-1">
+                          <h3 class="text-xl font-semibold text-gray-900">${proposal.post.caption}</h3>
+                          <p class="text-gray-600 mt-2">${proposal.post.description}</p>
+                          
+                          <div class="grid grid-cols-2 gap-4 mt-4 text-sm text-gray-500">
+                              <div class="flex items-center gap-2">
+                                  <i class="fas fa-map-marker-alt w-4"></i>
+                                  <span>${proposal.post.location}</span>
+                              </div>
+                              <div class="flex items-center gap-2">
+                                  <i class="fas fa-dollar-sign w-4"></i>
+                                  <span>${proposal.post.rate}/hr</span>
+                              </div>
+                              <div class="flex items-center gap-2">
+                                  <i class="fas fa-clock w-4"></i>
+                                  <span>${proposal.post.estimatedTime} hours</span>
+                              </div>
+                          </div>
+
+                          <div class="flex gap-2 mt-4">
+                              ${proposal.post.requiredSkills.split(',').map(skill => `
+                                  <span class="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-sm">
+                                      ${skill.trim()}
+                                  </span>
+                              `).join('')}
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="p-6">
+                  <div class="flex justify-between items-start">
+                      <div class="flex-1">
+                          <div class="flex items-center gap-4 mb-4">
+                              <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                                  <i class="fas fa-user-circle text-blue-500 text-2xl"></i>
+                              </div>
+                              <div>
+                                  <h4 class="text-lg font-semibold">
+                                      ${proposal.freelancer.firstName} ${proposal.freelancer.lastName}
+                                  </h4>
+                                  <p class="text-gray-500">${proposal.freelancer.email}</p>
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="flex flex-col items-end gap-4">
+                          <span class="px-4 py-2 rounded-full text-sm font-medium ${this.getStatusClasses(proposal)}">
+                              ${this.getStatusText(proposal)}
+                          </span>
+                          
+                          ${!proposal.isApproved && !proposal.isCancelled ? `
+                              <div class="flex gap-2">
+                                  <button data-action="approve" data-id="${proposal.id}"
+                                      class="action-btn inline-flex items-center px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">
+                                      <i class="fas fa-check mr-2"></i>
+                                      Approve
+                                  </button>
+                                  <button data-action="reject" data-id="${proposal.id}"
+                                      class="action-btn inline-flex items-center px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors">
+                                      <i class="fas fa-times mr-2"></i>
+                                      Reject
+                                  </button>
+                              </div>
+                          ` : ''}
+                      </div>
+                  </div>
+              </div>
+          </div>
+      `;
+  }
+
    
     async loadProposals() {
       if (!this.elements.container) return;
