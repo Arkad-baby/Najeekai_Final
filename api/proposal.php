@@ -224,7 +224,7 @@ else if (isset($_GET['customerId'])) {
                 "rate" => $row['rate'],
                 "estimatedTime" => $row['estimatedTime'],
                 "requiredSkills" => $row['requiredSkills'],
-                "postedAt" => $row['createdAt']
+             
             ]
         ];
     }
